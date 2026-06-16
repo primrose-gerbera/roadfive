@@ -434,10 +434,10 @@ function addProduct(e) {
         return;
     }
     
-    if (!/^\d{12}$/.test(combo)) {
-        showOwnerMessage('❌ Code must be exactly 12 digits', 'error');
-        return;
-    }
+   if (!/^[A-Za-z0-9]{12}$/.test(combo)) {
+    showOwnerMessage('❌ Code must be exactly 12 characters (letters or numbers)', 'error');
+    return;
+}
     
     if (!points || points < 1) {
         showOwnerMessage('❌ Points must be at least 1', 'error');
