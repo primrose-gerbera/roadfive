@@ -134,6 +134,34 @@ server.listen(PORT, '0.0.0.0', () => {
     console.log('💾 Data is PERMANENT!');
     console.log('========================================');
 });
+server.listen(PORT, '0.0.0.0', () => {
+    console.log('========================================');
+    console.log('✅ ROADFIVE Server Running');
+    console.log(`📍 Port: ${PORT}`);
+    console.log(`📍 URL: https://roadfive.onrender.com`);
+    console.log(`📁 Data file: ${DATA_FILE}`);
+    console.log('💾 Data is PERMANENT!');
+    console.log('========================================');
+});
+
+// ========================================
+// RAM MONITOR - ADD THIS
+// ========================================
+
+setInterval(() => {
+    const used = process.memoryUsage();
+    const heapUsedMB = Math.round(used.heapUsed / 1024 / 1024);
+    
+    if (heapUsedMB > 400) {
+        console.log(`🔴 CRITICAL: ${heapUsedMB} MB / 512 MB - UPGRADE NEEDED!`);
+    } else if (heapUsedMB > 300) {
+        console.log(`🟡 WARNING: ${heapUsedMB} MB / 512 MB - Monitor closely`);
+    } else {
+        console.log(`🟢 RAM: ${heapUsedMB} MB / 512 MB - All good!`);
+    }
+}, 60000);
+
+console.log('📊 RAM Monitor started - checking every 60 seconds');
 
 // Handle shutdown gracefully
 process.on('SIGINT', () => {
