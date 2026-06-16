@@ -236,13 +236,13 @@ function submitCombination(e) {
     const code = document.getElementById('combination').value.trim();
     const player = JSON.parse(localStorage.getItem('currentPlayer'));
     
-    // Validate 12 digits
-    if (!/^\d{12}$/.test(code)) {
-        showMessage('❌ Must be exactly 12 digits', 'error');
-        document.getElementById('combination').value = '';
-        document.getElementById('combination').focus();
-        return;
-    }
+    // Validate 12 alphanumeric characters (letters AND numbers)
+if (!/^[A-Za-z0-9]{12}$/.test(code)) {
+    showMessage('❌ Must be exactly 12 characters (letters or numbers)', 'error');
+    document.getElementById('combination').value = '';
+    document.getElementById('combination').focus();
+    return;
+}
     
     // Check if product exists
     const snacks = JSON.parse(localStorage.getItem('snacks'));
