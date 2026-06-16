@@ -1,6 +1,8 @@
 /* ========================================
-   ROADFIVE - Glassmorphism Theme with Background Image
+   ROADFIVE - Glass Theme
    ======================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 * {
     margin: 0;
@@ -8,193 +10,155 @@
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
-    min-height: 100vh;
-    padding: 20px;
-    position: relative;
+:root {
+    --gold:   #F5C518;
+    --purple: #6C3FC5;
+    --violet: #3B1F6A;
+    --bg:     #0A0A10;
+    --card:   rgba(15, 12, 30, 0.78);
+    --input:  rgba(255,255,255,0.07);
+    --border: rgba(255,255,255,0.10);
+    --text:   #E0D9F5;
+    --muted:  rgba(200,190,230,0.50);
+}
+
+html, body {
+    height: 100%;
+    background: var(--bg);
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
     overflow-x: hidden;
-    background: #0a0a0a;
 }
 
-/* ========================================
-   BACKGROUND IMAGE - Shows through glass
-   ======================================== */
+body {
+    padding: 20px;
+    min-height: 100vh;
+    background: var(--bg);
+}
 
-body::before {
-    content: '';
+/* ── Background scene ─────────────────────────────── */
+.scene {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: 
-        /* Main dark gradient */
-        radial-gradient(ellipse at 20% 50%, rgba(40, 20, 60, 0.8) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 50%, rgba(20, 40, 80, 0.8) 0%, transparent 60%),
-        radial-gradient(ellipse at 50% 100%, rgba(80, 20, 40, 0.6) 0%, transparent 50%),
-        /* Dark base */
-        linear-gradient(180deg, #0a0a0f 0%, #0d0d1a 30%, #0a0a0f 100%);
-    pointer-events: none;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
     z-index: 0;
-}
-
-/* Glow Orbs - Like iPhone wallpaper */
-body::after {
-    content: '';
-    position: fixed;
-    top: -300px;
-    right: -200px;
-    width: 800px;
-    height: 800px;
-    background: radial-gradient(circle, rgba(100, 50, 200, 0.15) 0%, transparent 60%);
-    border-radius: 50%;
     pointer-events: none;
-    z-index: 0;
-    animation: orbFloat 8s ease-in-out infinite alternate;
 }
 
-@keyframes orbFloat {
-    0% { transform: translate(0, 0) scale(1); opacity: 0.5; }
-    50% { transform: translate(-50px, 30px) scale(1.2); opacity: 0.7; }
-    100% { transform: translate(20px, -20px) scale(0.9); opacity: 0.4; }
-}
-
-/* Second Orb */
-.orb2 {
-    position: fixed;
-    bottom: -200px;
-    left: -100px;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(200, 50, 100, 0.08) 0%, transparent 60%);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-    animation: orbFloat2 10s ease-in-out infinite alternate;
-}
-
-@keyframes orbFloat2 {
-    0% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(60px, -40px) scale(1.3); }
-    100% { transform: translate(-30px, 30px) scale(0.8); }
-}
-
-/* ========================================
-   GLASS CONTAINER - Frosted Glass Effect
-   ======================================== */
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(30px) saturate(1.2);
-    -webkit-backdrop-filter: blur(30px) saturate(1.2);
-    border-radius: 24px;
-    padding: 30px;
-    box-shadow: 
-        0 25px 80px rgba(0, 0, 0, 0.6),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.02);
-    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    z-index: 1;
-    border: 1px solid rgba(255, 255, 255, 0.04);
-}
-
-/* Glass Inner Glow */
-.container::before {
-    content: '';
+.sun {
     position: absolute;
-    top: -1px;
-    left: 20%;
-    right: 20%;
+    bottom: 18%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 60%,
+        #FFD966 0%,
+        #E8872A 28%,
+        #A8246A 55%,
+        transparent 72%);
+    filter: blur(2px);
+    opacity: 0.92;
+}
+
+.atmosphere {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 80% 55% at 50% 78%,
+            rgba(140, 50, 160, 0.55) 0%,
+            transparent 70%),
+        linear-gradient(to bottom, #0A0A10 0%, #1A0D2E 50%, #0A0A10 100%);
+}
+
+.ship {
+    position: absolute;
+    bottom: calc(18% + 148px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 190px;
+    opacity: 0.35;
+}
+
+.horizon {
+    position: absolute;
+    bottom: 18%;
+    left: 10%;
+    right: 10%;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
-    border-radius: 50%;
-}
-
-/* Glass Reflection */
-.container::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 40%;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.01) 0%, transparent 100%);
-    border-radius: 24px 24px 0 0;
-    pointer-events: none;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* ========================================
-   Typography - Clean iOS Style
-   ======================================== */
-
-.game-title {
-    text-align: center;
-    font-size: 2.8em;
-    font-weight: 800;
-    letter-spacing: 2px;
-    color: rgba(255, 255, 255, 0.9);
-    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-    position: relative;
+    background: linear-gradient(to right,
+        transparent, rgba(245,197,24,0.45) 20%,
+        rgba(245,197,24,0.45) 80%, transparent);
 }
 
 .tagline {
-    text-align: center;
-    color: rgba(255, 255, 255, 0.25);
-    margin-bottom: 30px;
-    font-size: 0.9em;
+    position: absolute;
+    bottom: calc(18% - 22px);
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: rgba(220,210,240,0.18);
+    white-space: nowrap;
     font-weight: 300;
-    letter-spacing: 4px;
-    text-transform: uppercase;
 }
 
-/* ========================================
-   BUTTONS - Glass Style
-   ======================================== */
+/* ── Glass Container ───────────────────────────────── */
+.glass-container {
+    position: relative;
+    z-index: 10;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 30px;
+    backdrop-filter: blur(22px) saturate(1.4);
+    -webkit-backdrop-filter: blur(22px) saturate(1.4);
+    box-shadow:
+        0 0 0 1px rgba(108,63,197,0.18),
+        0 24px 64px rgba(0,0,0,0.65),
+        0 0 80px rgba(108,63,197,0.12) inset;
+}
 
+/* ── Typography ─────────────────────────────────────── */
+.game-title {
+    text-align: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.8em;
+    letter-spacing: 0.12em;
+    color: #fff;
+    text-shadow: 0 0 24px rgba(245,197,24,0.35);
+}
+
+.tagline-text {
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 0.30em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+/* ── Buttons ────────────────────────────────────────── */
 .btn {
     padding: 12px 28px;
     font-size: 0.9em;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 14px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     font-weight: 600;
     display: inline-block;
     text-align: center;
     letter-spacing: 0.5px;
-    position: relative;
-    overflow: hidden;
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     color: rgba(255, 255, 255, 0.7);
-}
-
-.btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, transparent 100%);
-    border-radius: 14px;
-    pointer-events: none;
 }
 
 .btn:hover {
@@ -204,34 +168,31 @@ body::after {
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
 }
 
-.btn:active {
-    transform: translateY(0px) scale(0.98);
-}
-
 .btn-primary {
-    background: rgba(100, 50, 200, 0.15);
-    color: rgba(255, 255, 255, 0.9);
-    border-color: rgba(100, 50, 200, 0.15);
+    background: linear-gradient(135deg, #7B4FD8 0%, #5830A0 100%);
+    color: #fff;
+    border: none;
+    box-shadow: 0 4px 20px rgba(108,63,197,0.40);
 }
 
 .btn-primary:hover {
-    background: rgba(100, 50, 200, 0.25);
-    border-color: rgba(100, 50, 200, 0.25);
-    box-shadow: 0 8px 40px rgba(100, 50, 200, 0.15);
+    opacity: 0.92;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 28px rgba(108,63,197,0.55);
 }
 
 .btn-secondary {
     background: rgba(255, 255, 255, 0.02);
-    color: rgba(255, 255, 255, 0.3);
-    border-color: rgba(255, 255, 255, 0.03);
+    color: var(--muted);
+    border-color: var(--border);
     padding: 8px 16px;
     font-size: 0.8em;
 }
 
 .btn-secondary:hover {
     background: rgba(255, 255, 255, 0.04);
-    color: rgba(255, 255, 255, 0.5);
-    border-color: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.1);
 }
 
 .btn-logout {
@@ -252,16 +213,14 @@ body::after {
     background: rgba(255, 50, 50, 0.08);
     border-color: rgba(255, 50, 50, 0.06);
     color: rgba(255, 100, 100, 0.5);
+    transform: translateY(-2px);
 }
 
 .btn-full {
     width: 100%;
 }
 
-/* ========================================
-   EDIT & REMOVE BUTTONS - Glass Style
-   ======================================== */
-
+/* ── Edit & Remove Buttons ─────────────────────────── */
 .btn-edit {
     background: rgba(255, 255, 255, 0.02);
     color: rgba(255, 255, 255, 0.2);
@@ -302,10 +261,7 @@ body::after {
     border-color: rgba(255, 50, 50, 0.04);
 }
 
-/* ========================================
-   Forms - Glass Style
-   ======================================== */
-
+/* ── Forms ──────────────────────────────────────────── */
 .auth-form {
     max-width: 400px;
     margin: 20px auto;
@@ -317,42 +273,32 @@ body::after {
 
 .form-group label {
     display: block;
-    margin-bottom: 6px;
-    color: rgba(255, 255, 255, 0.2);
-    font-weight: 600;
-    font-size: 0.8em;
-    letter-spacing: 1px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 7px;
+    text-transform: uppercase;
 }
 
 .form-group input {
     width: 100%;
-    padding: 12px 16px;
-    border: 1px solid rgba(255, 255, 255, 0.03);
-    border-radius: 14px;
-    font-size: 1em;
-    transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.02);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    color: rgba(255, 255, 255, 0.6);
+    background: var(--input);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 13px 16px;
+    font-size: 15px;
+    color: #fff;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .form-group input::placeholder {
-    color: rgba(255, 255, 255, 0.05);
+    color: rgba(255,255,255,0.25);
 }
 
 .form-group input:focus {
-    outline: none;
-    border-color: rgba(100, 50, 200, 0.15);
-    background: rgba(255, 255, 255, 0.04);
-    box-shadow: 0 0 40px rgba(100, 50, 200, 0.02);
-}
-
-.form-group small {
-    display: block;
-    margin-top: 5px;
-    color: rgba(255, 255, 255, 0.05);
-    font-size: 0.7em;
+    border-color: var(--purple);
+    box-shadow: 0 0 0 3px rgba(108,63,197,0.22);
 }
 
 .form-row {
@@ -361,49 +307,7 @@ body::after {
     gap: 15px;
 }
 
-.auth-links {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.auth-links hr {
-    margin: 15px 0;
-    border: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.02);
-}
-
-.owner-link a {
-    color: rgba(255, 255, 255, 0.08);
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s;
-    font-size: 0.8em;
-    letter-spacing: 1px;
-}
-
-.owner-link a:hover {
-    color: rgba(255, 255, 255, 0.15);
-}
-
-.back-home {
-    display: inline-block;
-    margin-bottom: 20px;
-    color: rgba(255, 255, 255, 0.08);
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s;
-    font-size: 0.8em;
-    letter-spacing: 1px;
-}
-
-.back-home:hover {
-    color: rgba(255, 255, 255, 0.15);
-}
-
-/* ========================================
-   Dashboard Header - Glass Style
-   ======================================== */
-
+/* ── Dashboard Header ──────────────────────────────── */
 .dashboard-header {
     display: flex;
     justify-content: space-between;
@@ -412,7 +316,7 @@ body::after {
     flex-wrap: wrap;
     gap: 15px;
     padding-bottom: 15px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid var(--border);
 }
 
 .header-actions {
@@ -430,19 +334,16 @@ body::after {
     letter-spacing: 1px;
     background: rgba(255, 255, 255, 0.02);
     border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
 }
 
-/* ========================================
-   Player Stats - Glass Style
-   ======================================== */
-
+/* ── Player Stats ───────────────────────────────────── */
 .player-stats {
     background: rgba(255, 255, 255, 0.02);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.03);
-    color: rgba(255, 255, 255, 0.6);
+    border: 1px solid var(--border);
+    color: var(--text);
     padding: 28px 32px;
     border-radius: 18px;
     margin-bottom: 30px;
@@ -497,10 +398,7 @@ body::after {
     50% { transform: scale(1.02); opacity: 0.25; }
 }
 
-/* ========================================
-   Submit Section - Glass Style
-   ======================================== */
-
+/* ── Submit Section ─────────────────────────────────── */
 .submit-section {
     background: rgba(255, 255, 255, 0.02);
     backdrop-filter: blur(20px);
@@ -508,7 +406,7 @@ body::after {
     padding: 25px 30px;
     border-radius: 18px;
     margin-bottom: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
 }
 
 .submit-section h3 {
@@ -528,7 +426,7 @@ body::after {
     letter-spacing: 8px;
     margin: 12px 0;
     font-family: 'Courier New', monospace;
-    border: 1px solid rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
     border-radius: 14px;
     transition: all 0.3s ease;
     background: rgba(255, 255, 255, 0.01);
@@ -540,15 +438,13 @@ body::after {
 }
 
 .submit-section input:focus {
-    border-color: rgba(100, 50, 200, 0.08);
+    border-color: var(--purple);
     outline: none;
     background: rgba(255, 255, 255, 0.02);
+    box-shadow: 0 0 40px rgba(108,63,197,0.05);
 }
 
-/* ========================================
-   Messages - Glass Style
-   ======================================== */
-
+/* ── Messages ───────────────────────────────────────── */
 .message {
     margin-top: 15px;
     padding: 14px 20px;
@@ -580,10 +476,7 @@ body::after {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* ========================================
-   Dashboard Grid
-   ======================================== */
-
+/* ── Dashboard Grid ────────────────────────────────── */
 .dashboard-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -623,10 +516,7 @@ body::after {
     background: rgba(255, 255, 255, 0.02);
 }
 
-/* ========================================
-   List Items - Glass Style
-   ======================================== */
-
+/* ── List Items ────────────────────────────────────── */
 .history-item,
 .leaderboard-item,
 .snack-item,
@@ -675,13 +565,10 @@ body::after {
     border-left: 2px solid rgba(205, 127, 50, 0.02);
 }
 
-/* ========================================
-   Owner Section - Glass Style
-   ======================================== */
-
+/* ── Owner Section ──────────────────────────────────── */
 .owner-section {
     margin-bottom: 40px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid var(--border);
     padding-bottom: 25px;
 }
 
@@ -707,26 +594,23 @@ body::after {
     background: rgba(255, 255, 255, 0.01);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
     border-radius: 18px;
     padding: 25px;
 }
 
 .badge {
-    background: rgba(100, 50, 200, 0.05);
-    color: rgba(100, 50, 200, 0.1);
+    background: rgba(108,63,197,0.05);
+    color: rgba(108,63,197,0.1);
     font-size: 0.4em;
     padding: 4px 14px;
     border-radius: 20px;
     font-weight: 700;
     letter-spacing: 1px;
-    border: 1px solid rgba(100, 50, 200, 0.03);
+    border: 1px solid rgba(108,63,197,0.03);
 }
 
-/* ========================================
-   Info Boxes - Glass Style
-   ======================================== */
-
+/* ── Info Boxes ────────────────────────────────────── */
 .info-box {
     background: rgba(255, 255, 255, 0.01);
     backdrop-filter: blur(10px);
@@ -752,19 +636,75 @@ body::after {
     color: rgba(255, 255, 255, 0.1);
 }
 
-/* ========================================
-   Owner Login
-   ======================================== */
+/* ── Product Form ──────────────────────────────────── */
+.product-form {
+    background: rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 14px;
+    margin-top: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.01);
+}
 
+.product-form h3 {
+    margin-bottom: 15px;
+    color: rgba(255, 255, 255, 0.06);
+    font-size: 0.8em;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+/* ── Links ──────────────────────────────────────────── */
+.auth-links {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.auth-links hr {
+    margin: 15px 0;
+    border: none;
+    border-top: 1px solid var(--border);
+}
+
+.owner-link a {
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+
+.owner-link a:hover {
+    opacity: 0.75;
+}
+
+.back-home {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: var(--muted);
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+
+.back-home:hover {
+    color: #fff;
+}
+
+/* ── Divider ────────────────────────────────────────── */
+.divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 16px 0 14px;
+}
+
+/* ── Owner Login Box ───────────────────────────────── */
 .owner-login-box {
     max-width: 450px;
     margin: 0 auto;
 }
 
-/* ========================================
-   Player Items - Glass Style
-   ======================================== */
-
+/* ── Player Item ───────────────────────────────────── */
 .player-item {
     display: flex;
     justify-content: space-between;
@@ -794,41 +734,13 @@ body::after {
     color: rgba(255, 50, 50, 0.15);
 }
 
-/* ========================================
-   Product Form
-   ======================================== */
-
-.product-form {
-    background: rgba(255, 255, 255, 0.01);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: 20px;
-    border-radius: 14px;
-    margin-top: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.01);
-}
-
-.product-form h3 {
-    margin-bottom: 15px;
-    color: rgba(255, 255, 255, 0.06);
-    font-size: 0.8em;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-}
-
-/* ========================================
-   Placeholder Text
-   ======================================== */
-
+/* ── Placeholder ───────────────────────────────────── */
 ::placeholder {
     color: rgba(255, 255, 255, 0.02);
     opacity: 0.7;
 }
 
-/* ========================================
-   Responsive
-   ======================================== */
-
+/* ── Responsive ────────────────────────────────────── */
 @media (max-width: 992px) {
     .form-row {
         grid-template-columns: 1fr 1fr;
@@ -836,7 +748,7 @@ body::after {
 }
 
 @media (max-width: 768px) {
-    .container {
+    .glass-container {
         padding: 18px;
         border-radius: 18px;
     }
@@ -879,6 +791,27 @@ body::after {
     .points-value {
         font-size: 2.8em;
     }
+    
+    .sun {
+        width: 220px;
+        height: 220px;
+        bottom: 15%;
+    }
+    
+    .ship {
+        width: 120px;
+        bottom: calc(15% + 100px);
+    }
+    
+    .horizon {
+        bottom: 15%;
+    }
+    
+    .tagline {
+        bottom: calc(15% - 18px);
+        font-size: 8px;
+        letter-spacing: 0.15em;
+    }
 }
 
 @media (max-width: 480px) {
@@ -886,7 +819,7 @@ body::after {
         padding: 10px;
     }
     
-    .container {
+    .glass-container {
         padding: 12px;
         border-radius: 14px;
     }
