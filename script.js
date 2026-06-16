@@ -1,6 +1,6 @@
 // ========================================
 // ROADFIVE - Main Application
-// Complete with Edit & Remove Products
+// Complete with Glass Theme Support
 // ========================================
 
 // ========================================
@@ -90,6 +90,7 @@ function initializeData() {
 window.onload = function() {
     initializeData();
     
+    // Load data from server (only on Render)
     if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
         loadAllData().then(() => {
             setupPage();
@@ -102,22 +103,62 @@ window.onload = function() {
 function setupPage() {
     const path = location.pathname;
     
+    // Login page
     if (path.includes('login.html') || path === '/' || path === '') {
-        document.getElementById('loginForm')?.addEventListener('submit', handlePlayerLogin);
+        const loginBtn = document.getElementById('loginBtn');
+        if (loginBtn) {
+            loginBtn.addEventListener('click', handlePlayerLogin);
+        }
+        // Also handle enter key
+        const passwordField = document.getElementById('password');
+        if (passwordField) {
+            passwordField.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    handlePlayerLogin(e);
+                }
+            });
+        }
+        const usernameField = document.getElementById('username');
+        if (usernameField) {
+            usernameField.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    handlePlayerLogin(e);
+                }
+            });
+        }
     }
     
+    // Owner login page
     if (path.includes('owner-login.html')) {
-        document.getElementById('ownerLoginForm')?.addEventListener('submit', handleOwnerLogin);
+        const ownerLoginBtn = document.getElementById('ownerLoginBtn');
+        if (ownerLoginBtn) {
+            ownerLoginBtn.addEventListener('click', handleOwnerLogin);
+        }
+        // Also handle enter key
+        const ownerPassword = document.getElementById('ownerPassword');
+        if (ownerPassword) {
+            ownerPassword.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    handleOwnerLogin(e);
+                }
+            });
+        }
     }
     
+    // Register page
     if (path.includes('register.html')) {
-        document.getElementById('registerForm')?.addEventListener('submit', handleRegister);
+        const registerBtn = document.getElementById('registerBtn');
+        if (registerBtn) {
+            registerBtn.addEventListener('click', handleRegister);
+        }
     }
     
+    // Player dashboard
     if (path.includes('player-dashboard.html')) {
         loadPlayerDashboard();
     }
     
+    // Owner dashboard
     if (path.includes('owner-dashboard.html')) {
         loadOwnerDashboard();
     }
@@ -134,9 +175,9 @@ function handlePlayerLogin(e) {
     const users = JSON.parse(localStorage.getItem('users'));
     const user = users.find(u => u.username === username && u.password === password);
     
-    if (user) {
+    if (user && user.role === 'player') {
         localStorage.setItem('currentPlayer', JSON.stringify(user));
-        location.href = 'player-dashboard.html';
+        window.location.href = 'player-dashboard.html';
     } else {
         alert('❌ Invalid credentials. Please register.');
     }
@@ -180,7 +221,35 @@ function handleRegister(e) {
     
     localStorage.setItem('users', JSON.stringify(users));
     alert('✅ Account created! Please login.');
-    location.href = 'login.html';
+    window.location.href = 'login.html';
+}
+
+// ========================================
+// OWNER AUTHENTICATION
+// ========================================
+
+function handleOwnerLogin(e) {
+    e.preventDefault();
+    const username = document.getElementById('ownerUsername').value.trim();
+    const password = document.getElementById('ownerPassword').value;
+    const owner = JSON.parse(localStorage.getItem('owner'));
+    
+    if (owner && owner.username === username && owner.password === password) {
+        localStorage.setItem('currentOwner', JSON.stringify(owner));
+        window.location.href = 'owner-dashboard.html';
+    } else {
+        alert('❌ Invalid owner credentials');
+    }
+}
+
+function changeOwnerPassword(oldPass, newPass) {
+    const owner = JSON.parse(localStorage.getItem('owner'));
+    if (owner.password === oldPass) {
+        owner.password = newPass;
+        localStorage.setItem('owner', JSON.stringify(owner));
+        return true;
+    }
+    return false;
 }
 
 // ========================================
@@ -189,8 +258,8 @@ function handleRegister(e) {
 
 function loadPlayerDashboard() {
     const player = JSON.parse(localStorage.getItem('currentPlayer'));
-    if (!player) {
-        location.href = 'login.html';
+    if (!player || player.role !== 'player') {
+        window.location.href = 'login.html';
         return;
     }
     
@@ -199,7 +268,7 @@ function loadPlayerDashboard() {
     document.getElementById('combinationForm')?.addEventListener('submit', submitCombination);
     document.getElementById('logoutBtn')?.addEventListener('click', () => {
         localStorage.removeItem('currentPlayer');
-        location.href = 'login.html';
+        window.location.href = 'login.html';
     });
     
     loadPlayerHistory();
@@ -283,7 +352,7 @@ function loadPlayerHistory() {
     const div = document.getElementById('historyList');
     
     if (!history.length) {
-        div.innerHTML = '<p style="color:#999;text-align:center;">No submissions yet</p>';
+        div.innerHTML = '<p style="color:rgba(255,255,255,0.05);text-align:center;">No submissions yet</p>';
         return;
     }
     
@@ -303,7 +372,7 @@ function loadLeaderboard() {
     const div = document.getElementById('leaderboard');
     
     if (!players.length) {
-        div.innerHTML = '<p style="color:#999;text-align:center;">No players yet</p>';
+        div.innerHTML = '<p style="color:rgba(255,255,255,0.05);text-align:center;">No players yet</p>';
         return;
     }
     
@@ -325,41 +394,13 @@ function showMessage(msg, type) {
 }
 
 // ========================================
-// OWNER AUTHENTICATION
-// ========================================
-
-function handleOwnerLogin(e) {
-    e.preventDefault();
-    const username = document.getElementById('ownerUsername').value.trim();
-    const password = document.getElementById('ownerPassword').value;
-    const owner = JSON.parse(localStorage.getItem('owner'));
-    
-    if (owner && owner.username === username && owner.password === password) {
-        localStorage.setItem('currentOwner', JSON.stringify(owner));
-        location.href = 'owner-dashboard.html';
-    } else {
-        alert('❌ Invalid owner credentials');
-    }
-}
-
-function changeOwnerPassword(oldPass, newPass) {
-    const owner = JSON.parse(localStorage.getItem('owner'));
-    if (owner.password === oldPass) {
-        owner.password = newPass;
-        localStorage.setItem('owner', JSON.stringify(owner));
-        return true;
-    }
-    return false;
-}
-
-// ========================================
 // OWNER DASHBOARD
 // ========================================
 
 function loadOwnerDashboard() {
     const owner = JSON.parse(localStorage.getItem('currentOwner'));
-    if (!owner) {
-        location.href = 'owner-login.html';
+    if (!owner || owner.role !== 'owner') {
+        window.location.href = 'owner-login.html';
         return;
     }
     
@@ -367,7 +408,7 @@ function loadOwnerDashboard() {
     document.getElementById('addSnackForm')?.addEventListener('submit', addProduct);
     document.getElementById('ownerLogoutBtn')?.addEventListener('click', () => {
         localStorage.removeItem('currentOwner');
-        location.href = 'owner-login.html';
+        window.location.href = 'owner-login.html';
     });
     document.getElementById('changePasswordBtn')?.addEventListener('click', () => {
         const oldP = prompt('Current password:');
@@ -376,7 +417,7 @@ function loadOwnerDashboard() {
             if (changeOwnerPassword(oldP, newP)) {
                 alert('✅ Password changed! Login again.');
                 localStorage.removeItem('currentOwner');
-                location.href = 'owner-login.html';
+                window.location.href = 'owner-login.html';
             } else {
                 alert('❌ Current password is incorrect');
             }
@@ -434,17 +475,13 @@ function addProduct(e) {
     loadProductsList();
 }
 
-// ========================================
-// PRODUCTS LIST WITH EDIT & REMOVE
-// ========================================
-
 function loadProductsList() {
     const snacks = JSON.parse(localStorage.getItem('snacks'));
     const div = document.getElementById('snacksList');
     
     if (!snacks.length) {
         div.innerHTML = `
-            <div style="text-align:center;padding:20px;color:#999;">
+            <div style="text-align:center;padding:20px;color:rgba(255,255,255,0.05);">
                 <p>📦 No products added yet</p>
                 <p style="font-size:0.9em;">Use the form above to add your first product</p>
             </div>
@@ -469,10 +506,6 @@ function loadProductsList() {
         </div>
     `).join('');
 }
-
-// ========================================
-// EDIT PRODUCT (Owner Only)
-// ========================================
 
 function editProduct(productId) {
     const snacks = JSON.parse(localStorage.getItem('snacks'));
@@ -524,10 +557,6 @@ function editProduct(productId) {
     showOwnerMessage(`✅ "${newName.trim()}" updated successfully!`, 'success');
     loadProductsList();
 }
-
-// ========================================
-// REMOVE PRODUCT (Owner Only)
-// ========================================
 
 function removeProduct(productId) {
     const snacks = JSON.parse(localStorage.getItem('snacks'));
@@ -587,7 +616,7 @@ function loadPlayersList() {
     const div = document.getElementById('playersList');
     
     if (!players.length) {
-        div.innerHTML = '<p style="color:#999;text-align:center;">No registered players</p>';
+        div.innerHTML = '<p style="color:rgba(255,255,255,0.05);text-align:center;">No registered players</p>';
         return;
     }
     
@@ -614,7 +643,7 @@ function loadAllSubmissions() {
     const div = document.getElementById('allSubmissions');
     
     if (!subs.length) {
-        div.innerHTML = '<p style="color:#999;text-align:center;">No submissions yet</p>';
+        div.innerHTML = '<p style="color:rgba(255,255,255,0.05);text-align:center;">No submissions yet</p>';
         return;
     }
     
@@ -622,7 +651,7 @@ function loadAllSubmissions() {
         const user = users.find(u => u.id === s.userId);
         const snack = snacks.find(sn => sn.id === s.snackId);
         return `
-            <div class="submission-item" style="background:${s.isSuccess ? '#e8f5e9' : '#ffebee'}">
+            <div class="submission-item" style="background:${s.isSuccess ? 'rgba(0,255,0,0.02)' : 'rgba(255,0,0,0.02)'}">
                 <strong>Player:</strong> ${user?.username || 'Deleted'}<br>
                 <strong>Code:</strong> ${s.combination}<br>
                 <strong>Product:</strong> ${snack?.name || '❌ No match'}<br>
