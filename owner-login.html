@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROADFIVE - Owner Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="login.html" class="back-home">← Back</a>
+        
+        <h1 class="game-title">👑 Owner Access</h1>
+        <p class="tagline">Restricted Area</p>
+        
+        <div class="owner-login-box">
+            <form id="ownerLoginForm" class="auth-form">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="ownerUsername" required placeholder="Enter username">
+                </div>
+                
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="ownerPassword" required placeholder="Enter password">
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+            
+            <div class="warning-box">
+                <p>⚠️ <strong>Restricted Access</strong></p>
+                <p>Authorized Personnel Only</p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

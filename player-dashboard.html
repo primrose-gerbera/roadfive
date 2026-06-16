@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROADFIVE - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="dashboard-header">
+            <h1 class="game-title">🎮 ROADFIVE</h1>
+            <button id="logoutBtn" class="btn-logout">Logout</button>
+        </div>
+        
+        <div class="player-stats">
+            <h2>Welcome, <span id="playerName">Player</span>!</h2>
+            <div class="points-card">
+                <h3>Your Points</h3>
+                <div class="points-value" id="totalPoints">0</div>
+            </div>
+        </div>
+        
+        <div class="submit-section">
+            <h3>Enter Your 12-Digit Code</h3>
+            <form id="combinationForm">
+                <input type="text" id="combination" maxlength="12" placeholder="Enter 12-digit code" pattern="[0-9]{12}" required autocomplete="off">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            <div id="message" class="message"></div>
+        </div>
+        
+        <div class="dashboard-grid">
+            <div class="history-section">
+                <h3>📜 Your History</h3>
+                <div id="historyList" class="history-list">
+                    <p>Loading...</p>
+                </div>
+            </div>
+            
+            <div class="leaderboard-section">
+                <h3>🏆 Leaderboard</h3>
+                <div id="leaderboard" class="leaderboard-list">
+                    <p>Loading...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "roadfive",
+  "version": "1.0.0",
+  "description": "ROADFIVE - Internet Cafe Snack Points System",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

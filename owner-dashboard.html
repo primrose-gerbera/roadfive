@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROADFIVE - Owner Panel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="dashboard-header">
+            <h1 class="game-title">👑 Owner Panel</h1>
+            <div class="header-actions">
+                <span id="ownerName" class="owner-label"></span>
+                <button id="changePasswordBtn" class="btn-secondary">Change Password</button>
+                <button id="ownerLogoutBtn" class="btn-logout">Logout</button>
+            </div>
+        </div>
+
+        <!-- PRODUCT MANAGEMENT -->
+        <div class="owner-section highlight-section">
+            <h2>🏷️ Product Management <span class="badge">OWNER ONLY</span></h2>
+            
+            <div class="info-box warning-box">
+                <p>⚠️ <strong>Only You</strong> can add 12-digit codes to products.</p>
+                <p>Players can only enter codes to earn points.</p>
+            </div>
+
+            <form id="addSnackForm" class="product-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Product Name</label>
+                        <input type="text" id="snackName" placeholder="e.g., Potato Chips" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>12-Digit Code</label>
+                        <input type="text" id="snackCombination" maxlength="12" placeholder="123456789012" pattern="[0-9]{12}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Points</label>
+                        <input type="number" id="snackPoints" placeholder="50" required min="1">
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-full">✅ Add Product</button>
+            </form>
+            <div id="ownerMessage" class="message"></div>
+        </div>
+
+        <!-- PRODUCTS LIST -->
+        <div class="owner-section">
+            <h2>📋 Products & Codes</h2>
+            <div id="snacksList" class="snacks-list">
+                <p>Loading...</p>
+            </div>
+        </div>
+
+        <!-- CUSTOMER MANAGEMENT -->
+        <div class="owner-section">
+            <h2>👥 Customers</h2>
+            <div id="playersList" class="players-list">
+                <p>Loading...</p>
+            </div>
+        </div>
+
+        <!-- SUBMISSIONS -->
+        <div class="owner-section">
+            <h2>📊 Submissions</h2>
+            <div id="allSubmissions" class="submissions-list">
+                <p>Loading...</p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
