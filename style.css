@@ -629,3 +629,58 @@ body {
         font-size: 2.2em;
     }
 }
+
+/* ========================================
+   Edit & Remove Buttons
+   ======================================== */
+
+.btn-edit {
+    background: linear-gradient(135deg, #2c3e7a 0%, #4a2c6a 100%);
+    color: #ffffff;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85em;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(44, 62, 122, 0.25);
+}
+
+.btn-edit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(44, 62, 122, 0.35);
+}
+
+.btn-remove {
+    background: linear-gradient(135deg, #8b0000 0%, #cc0000 100%);
+    color: #ffffff;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85em;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(204, 0, 0, 0.25);
+}
+
+.btn-remove:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(204, 0, 0, 0.35);
+}
+
+.snack-item {
+    background: #faf8fc;
+    padding: 14px 18px;
+    margin: 10px 0;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    border: 1px solid #ece8f0;
+}
+
+.snack-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 3px 15px rgba(44, 62, 122, 0.08);
+    border-color: #c8bcd8;
+}
