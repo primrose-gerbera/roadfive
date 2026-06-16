@@ -1,40 +1,244 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROADFIVE - Owner Login</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>ROADFIVE – Owner Login</title>
     <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="container">
-        <a href="login.html" class="back-home">← Back</a>
-        
-        <h1 class="game-title">👑 Owner Access</h1>
-        <p class="tagline">Restricted Area</p>
-        
-        <div class="owner-login-box">
-            <form id="ownerLoginForm" class="auth-form">
-                <div class="form-group">
-                    <label>Username</label>
-                    <input type="text" id="ownerUsername" required placeholder="Enter username">
-                </div>
-                
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" id="ownerPassword" required placeholder="Enter password">
-                </div>
-                
-                <button type="submit" class="btn btn-primary">Login</button>
-            </form>
-            
-            <div class="warning-box">
-                <p>⚠️ <strong>Restricted Access</strong></p>
-                <p>Authorized Personnel Only</p>
-            </div>
-        </div>
-    </div>
-    
-    <script src="script.js"></script>
-</body>
-</html>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --gold:   #F5C518;
+            --purple: #6C3FC5;
+            --violet: #3B1F6A;
+            --bg:     #0A0A10;
+            --card:   rgba(15, 12, 30, 0.78);
+            --input:  rgba(255,255,255,0.07);
+            --border: rgba(255,255,255,0.10);
+            --text:   #E0D9F5;
+            --muted:  rgba(200,190,230,0.50);
+        }
+
+        html, body {
+            height: 100%;
+            background: var(--bg);
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            overflow: hidden;
+        }
+
+        .scene {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .sun {
+            position: absolute;
+            bottom: 18%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 50% 60%,
+                #FFD966 0%,
+                #E8872A 28%,
+                #A8246A 55%,
+                transparent 72%);
+            filter: blur(2px);
+            opacity: 0.92;
+        }
+
+        .atmosphere {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 55% at 50% 78%,
+                    rgba(140, 50, 160, 0.55) 0%,
+                    transparent 70%),
+                linear-gradient(to bottom, #0A0A10 0%, #1A0D2E 50%, #0A0A10 100%);
+        }
+
+        .ship {
+            position: absolute;
+            bottom: calc(18% + 148px);
+            left: 50%;
+            transform: translateX(-50%);
+            width: 190px;
+            opacity: 0.35;
+        }
+
+        .horizon {
+            position: absolute;
+            bottom: 18%;
+            left: 10%;
+            right: 10%;
+            height: 1px;
+            background: linear-gradient(to right,
+                transparent, rgba(245,197,24,0.45) 20%,
+                rgba(245,197,24,0.45) 80%, transparent);
+        }
+
+        .tagline {
+            position: absolute;
+            bottom: calc(18% - 22px);
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 11px;
+            letter-spacing: 0.22em;
+            color: rgba(220,210,240,0.18);
+            white-space: nowrap;
+            font-weight: 300;
+        }
+
+        .stage {
+            position: relative;
+            z-index: 10;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+            width: 420px;
+            max-width: 92vw;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 44px 40px 40px;
+            backdrop-filter: blur(22px) saturate(1.4);
+            -webkit-backdrop-filter: blur(22px) saturate(1.4);
+            box-shadow:
+                0 0 0 1px rgba(108,63,197,0.18),
+                0 24px 64px rgba(0,0,0,0.65),
+                0 0 80px rgba(108,63,197,0.12) inset;
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 32px;
+        }
+
+        .brand-lock {
+            font-size: 40px;
+            line-height: 1;
+            filter: drop-shadow(0 0 10px rgba(245,197,24,0.5));
+        }
+
+        .brand-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 38px;
+            letter-spacing: 0.12em;
+            color: #fff;
+            text-shadow: 0 0 24px rgba(245,197,24,0.35);
+        }
+
+        .brand-sub {
+            font-size: 10px;
+            letter-spacing: 0.30em;
+            color: var(--muted);
+            text-transform: uppercase;
+        }
+
+        .field { margin-bottom: 18px; }
+
+        label {
+            display: block;
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            color: var(--muted);
+            margin-bottom: 7px;
+            text-transform: uppercase;
+        }
+
+        input {
+            width: 100%;
+            background: var(--input);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 13px 16px;
+            font-size: 15px;
+            color: #fff;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input::placeholder { color: rgba(255,255,255,0.25); }
+
+        input:focus {
+            border-color: var(--purple);
+            box-shadow: 0 0 0 3px rgba(108,63,197,0.22);
+        }
+
+        .btn-login {
+            display: block;
+            width: 100%;
+            margin-top: 26px;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #7B4FD8 0%, #5830A0 100%);
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+            box-shadow: 0 4px 20px rgba(108,63,197,0.40);
+        }
+
+        .btn-login:hover {
+            opacity: 0.92;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 28px rgba(108,63,197,0.55);
+        }
+
+        .btn-login:active { transform: translateY(0); }
+
+        .card-footer {
+            margin-top: 22px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .card-footer a {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+
+        .card-footer a:hover { opacity: 0.75; }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 14px;
+            font-size: 12px;
+            color: var(--muted);
+            opacity: 0.65;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            text-decoration: none;
+        }
+
+        .back-link:hover { opacity: 1; }
+
+        .divider {
+            border
