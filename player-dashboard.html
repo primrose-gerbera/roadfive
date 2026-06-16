@@ -24,7 +24,7 @@
         <div class="submit-section">
             <h3>Enter Your 12-Digit Code</h3>
             <form id="combinationForm">
-                <input type="text" id="combination" maxlength="12" placeholder="Enter 12-digit code" pattern="[0-9]{12}" required autocomplete="off">
+                <input type="text" id="combination" maxlength="12" placeholder="Enter 12-character code (letters & numbers)" pattern="[A-Za-z0-9]{12}" required autocomplete="off" style="text-transform:uppercase;">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
             <div id="message" class="message"></div>
