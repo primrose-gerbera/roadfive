@@ -568,6 +568,103 @@ function loadAllSubmissions() {
         `;
     }).join('');
 }
+// ========================================
+// EDIT PRODUCT (Owner Only)
+// ========================================
+
+function editProduct(productId) {
+    const snacks = JSON.parse(localStorage.getItem('snacks'));
+    const product = snacks.find(s => s.id === productId);
+    
+    if (!product) {
+        showOwnerMessage('❌ Product not found', 'error');
+        return;
+    }
+    
+    // Edit Product Name
+    const newName = prompt('✏️ Edit Product Name:', product.name);
+    if (newName === null) return;
+    if (!newName.trim()) {
+        showOwnerMessage('❌ Product name cannot be empty', 'error');
+        return;
+    }
+    
+    // Edit Code
+    const newCode = prompt('✏️ Edit 12-Character Code (letters & numbers):', product.combination);
+    if (newCode === null) return;
+    const cleanCode = newCode.trim().toUpperCase();
+    if (!/^[A-Z0-9]{12}$/.test(cleanCode)) {
+        showOwnerMessage('❌ Code must be exactly 12 characters (letters or numbers)', 'error');
+        return;
+    }
+    
+    // Check if code is already used
+    const existingProduct = snacks.find(s => s.combination === cleanCode && s.id !== productId);
+    if (existingProduct) {
+        showOwnerMessage('❌ This code is already used by another product', 'error');
+        return;
+    }
+    
+    // Edit Points
+    const newPoints = prompt('✏️ Edit Points Value:', product.points);
+    if (newPoints === null) return;
+    if (isNaN(newPoints) || parseInt(newPoints) < 1) {
+        showOwnerMessage('❌ Points must be at least 1', 'error');
+        return;
+    }
+    
+    // Update product
+    const index = snacks.findIndex(s => s.id === productId);
+    snacks[index] = {
+        ...product,
+        name: newName.trim(),
+        combination: cleanCode,
+        points: parseInt(newPoints),
+        lastEdited: new Date().toLocaleString()
+    };
+    
+    localStorage.setItem('snacks', JSON.stringify(snacks));
+    showOwnerMessage(`✅ "${newName.trim()}" updated successfully!`, 'success');
+    loadProductsList();
+}
+
+// ========================================
+// REMOVE PRODUCT (Owner Only)
+// ========================================
+
+function removeProduct(productId) {
+    const snacks = JSON.parse(localStorage.getItem('snacks'));
+    const product = snacks.find(s => s.id === productId);
+    
+    if (!product) {
+        showOwnerMessage('❌ Product not found', 'error');
+        return;
+    }
+    
+    // Check if product has been used
+    const submissions = JSON.parse(localStorage.getItem('submissions'));
+    const usedSubmissions = submissions.filter(s => s.snackId === productId && s.isSuccess === true);
+    
+    let confirmMessage = `⚠️ Remove "${product.name}"?`;
+    if (usedSubmissions.length > 0) {
+        confirmMessage += `\n\n⚠️ Used ${usedSubmissions.length} times by players.\nAll associated submissions will be removed.`;
+    }
+    confirmMessage += `\n\nThis cannot be undone!`;
+    
+    if (!confirm(confirmMessage)) return;
+    
+    // Remove product
+    const updatedSnacks = snacks.filter(s => s.id !== productId);
+    localStorage.setItem('snacks', JSON.stringify(updatedSnacks));
+    
+    // Remove associated submissions
+    const updatedSubmissions = submissions.filter(s => s.snackId !== productId);
+    localStorage.setItem('submissions', JSON.stringify(updatedSubmissions));
+    
+    showOwnerMessage(`✅ "${product.name}" removed!`, 'success');
+    loadProductsList();
+    loadAllSubmissions();
+}
 
 function showOwnerMessage(msg, type) {
     const div = document.getElementById('ownerMessage');
