@@ -1,5 +1,5 @@
 /* ========================================
-   ROADFIVE - Weapon of Mass Distribution Theme
+   ROADFIVE - Glassmorphism Theme with Background Image
    ======================================== */
 
 * {
@@ -9,15 +9,18 @@
 }
 
 body {
-    font-family: 'Impact', 'Arial Black', 'Segoe UI', sans-serif;
-    background: #0d0d0d;
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
     min-height: 100vh;
     padding: 20px;
     position: relative;
     overflow-x: hidden;
+    background: #0a0a0a;
 }
 
-/* Grunge Background Texture */
+/* ========================================
+   BACKGROUND IMAGE - Shows through glass
+   ======================================== */
+
 body::before {
     content: '';
     position: fixed;
@@ -26,45 +29,108 @@ body::before {
     right: 0;
     bottom: 0;
     background-image: 
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+        /* Main dark gradient */
+        radial-gradient(ellipse at 20% 50%, rgba(40, 20, 60, 0.8) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 50%, rgba(20, 40, 80, 0.8) 0%, transparent 60%),
+        radial-gradient(ellipse at 50% 100%, rgba(80, 20, 40, 0.6) 0%, transparent 50%),
+        /* Dark base */
+        linear-gradient(180deg, #0a0a0f 0%, #0d0d1a 30%, #0a0a0f 100%);
     pointer-events: none;
     z-index: 0;
 }
 
-/* Spray Paint Splatter Effect */
+/* Glow Orbs - Like iPhone wallpaper */
 body::after {
     content: '';
     position: fixed;
-    top: -50%;
-    right: -20%;
+    top: -300px;
+    right: -200px;
     width: 800px;
     height: 800px;
-    background: radial-gradient(circle at 70% 30%, rgba(255, 50, 50, 0.02) 0%, transparent 50%),
-                radial-gradient(circle at 30% 70%, rgba(255, 200, 0, 0.02) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(0, 200, 255, 0.01) 0%, transparent 60%);
+    background: radial-gradient(circle, rgba(100, 50, 200, 0.15) 0%, transparent 60%);
+    border-radius: 50%;
     pointer-events: none;
     z-index: 0;
+    animation: orbFloat 8s ease-in-out infinite alternate;
 }
+
+@keyframes orbFloat {
+    0% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+    50% { transform: translate(-50px, 30px) scale(1.2); opacity: 0.7; }
+    100% { transform: translate(20px, -20px) scale(0.9); opacity: 0.4; }
+}
+
+/* Second Orb */
+.orb2 {
+    position: fixed;
+    bottom: -200px;
+    left: -100px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(200, 50, 100, 0.08) 0%, transparent 60%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    animation: orbFloat2 10s ease-in-out infinite alternate;
+}
+
+@keyframes orbFloat2 {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(60px, -40px) scale(1.3); }
+    100% { transform: translate(-30px, 30px) scale(0.8); }
+}
+
+/* ========================================
+   GLASS CONTAINER - Frosted Glass Effect
+   ======================================== */
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    background: rgba(13, 13, 13, 0.95);
-    border-radius: 0px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(30px) saturate(1.2);
+    -webkit-backdrop-filter: blur(30px) saturate(1.2);
+    border-radius: 24px;
     padding: 30px;
     box-shadow: 
-        0 0 80px rgba(255, 50, 50, 0.03),
-        inset 0 0 80px rgba(255, 50, 50, 0.02);
+        0 25px 80px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.02);
     animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     z-index: 1;
-    border: 1px solid rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* Glass Inner Glow */
+.container::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 20%;
+    right: 20%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+    border-radius: 50%;
+}
+
+/* Glass Reflection */
+.container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.01) 0%, transparent 100%);
+    border-radius: 24px 24px 0 0;
+    pointer-events: none;
 }
 
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(40px);
+        transform: translateY(30px);
     }
     to {
         opacity: 1;
@@ -73,93 +139,69 @@ body::after {
 }
 
 /* ========================================
-   Typography - Bold Street Style
+   Typography - Clean iOS Style
    ======================================== */
 
 .game-title {
     text-align: center;
-    font-size: 3.5em;
-    font-weight: 900;
-    letter-spacing: 8px;
-    text-transform: uppercase;
-    font-family: 'Impact', 'Arial Black', sans-serif;
-    color: #ffffff;
-    text-shadow: 
-        0 0 20px rgba(255, 50, 50, 0.3),
-        0 0 60px rgba(255, 50, 50, 0.1),
-        4px 4px 0px rgba(255, 50, 50, 0.1),
-        8px 8px 0px rgba(0, 0, 0, 0.5);
+    font-size: 2.8em;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
     position: relative;
-}
-
-.game-title::before {
-    content: '◆';
-    position: absolute;
-    left: -50px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 0.6em;
-    color: rgba(255, 255, 255, 0.05);
-}
-
-.game-title::after {
-    content: '◆';
-    position: absolute;
-    right: -50px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 0.6em;
-    color: rgba(255, 255, 255, 0.05);
-}
-
-.sub-title {
-    text-align: center;
-    font-size: 0.8em;
-    font-weight: 700;
-    letter-spacing: 12px;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.15);
-    margin-top: -5px;
-    margin-bottom: 30px;
-    font-family: 'Arial Black', sans-serif;
 }
 
 .tagline {
     text-align: center;
-    color: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.25);
     margin-bottom: 30px;
-    font-size: 0.6em;
+    font-size: 0.9em;
     font-weight: 300;
-    letter-spacing: 15px;
+    letter-spacing: 4px;
     text-transform: uppercase;
-    font-family: 'Arial', sans-serif;
 }
 
 /* ========================================
-   BUTTONS - Bold Street Style
+   BUTTONS - Glass Style
    ======================================== */
 
 .btn {
-    padding: 14px 32px;
-    font-size: 0.85em;
-    border: 2px solid rgba(255, 255, 255, 0.05);
-    border-radius: 0px;
+    padding: 12px 28px;
+    font-size: 0.9em;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    font-weight: 900;
+    font-weight: 600;
     display: inline-block;
     text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    font-family: 'Arial Black', sans-serif;
+    letter-spacing: 0.5px;
     position: relative;
     overflow: hidden;
-    background: transparent;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, transparent 100%);
+    border-radius: 14px;
+    pointer-events: none;
 }
 
 .btn:hover {
-    transform: translateY(-3px);
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.06);
     border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
 }
 
 .btn:active {
@@ -167,52 +209,49 @@ body::after {
 }
 
 .btn-primary {
-    background: rgba(255, 50, 50, 0.05);
-    color: #ff3333;
-    border-color: rgba(255, 50, 50, 0.15);
-    box-shadow: 0 0 40px rgba(255, 50, 50, 0.02);
+    background: rgba(100, 50, 200, 0.15);
+    color: rgba(255, 255, 255, 0.9);
+    border-color: rgba(100, 50, 200, 0.15);
 }
 
 .btn-primary:hover {
-    background: rgba(255, 50, 50, 0.1);
-    border-color: rgba(255, 50, 50, 0.3);
-    box-shadow: 0 0 60px rgba(255, 50, 50, 0.05);
+    background: rgba(100, 50, 200, 0.25);
+    border-color: rgba(100, 50, 200, 0.25);
+    box-shadow: 0 8px 40px rgba(100, 50, 200, 0.15);
 }
 
 .btn-secondary {
     background: rgba(255, 255, 255, 0.02);
     color: rgba(255, 255, 255, 0.3);
     border-color: rgba(255, 255, 255, 0.03);
-    padding: 8px 20px;
-    font-size: 0.7em;
-    letter-spacing: 2px;
+    padding: 8px 16px;
+    font-size: 0.8em;
 }
 
 .btn-secondary:hover {
     background: rgba(255, 255, 255, 0.04);
     color: rgba(255, 255, 255, 0.5);
-    border-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.06);
 }
 
 .btn-logout {
-    background: rgba(255, 255, 255, 0.02);
-    color: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.03);
-    padding: 8px 20px;
-    font-size: 0.7em;
-    border-radius: 0px;
+    background: rgba(255, 50, 50, 0.05);
+    color: rgba(255, 100, 100, 0.3);
+    border: 1px solid rgba(255, 50, 50, 0.03);
+    padding: 8px 16px;
+    border-radius: 12px;
     cursor: pointer;
-    font-weight: 900;
+    font-weight: 600;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-family: 'Arial Black', sans-serif;
+    font-size: 0.8em;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .btn-logout:hover {
-    background: rgba(255, 50, 50, 0.05);
-    color: rgba(255, 50, 50, 0.3);
-    border-color: rgba(255, 50, 50, 0.1);
+    background: rgba(255, 50, 50, 0.08);
+    border-color: rgba(255, 50, 50, 0.06);
+    color: rgba(255, 100, 100, 0.5);
 }
 
 .btn-full {
@@ -220,53 +259,51 @@ body::after {
 }
 
 /* ========================================
-   EDIT & REMOVE BUTTONS
+   EDIT & REMOVE BUTTONS - Glass Style
    ======================================== */
 
 .btn-edit {
-    background: transparent;
+    background: rgba(255, 255, 255, 0.02);
     color: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.03);
-    padding: 6px 16px;
-    border-radius: 0px;
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    padding: 6px 14px;
+    border-radius: 10px;
     cursor: pointer;
-    font-weight: 900;
-    font-size: 0.65em;
+    font-weight: 600;
+    font-size: 0.75em;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    font-family: 'Arial Black', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .btn-edit:hover {
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(255, 255, 255, 0.04);
     color: rgba(255, 255, 255, 0.4);
-    border-color: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.04);
 }
 
 .btn-remove {
-    background: transparent;
-    color: rgba(255, 50, 50, 0.2);
-    border: 1px solid rgba(255, 50, 50, 0.03);
-    padding: 6px 16px;
-    border-radius: 0px;
+    background: rgba(255, 50, 50, 0.02);
+    color: rgba(255, 50, 50, 0.15);
+    border: 1px solid rgba(255, 50, 50, 0.02);
+    padding: 6px 14px;
+    border-radius: 10px;
     cursor: pointer;
-    font-weight: 900;
-    font-size: 0.65em;
+    font-weight: 600;
+    font-size: 0.75em;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    font-family: 'Arial Black', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .btn-remove:hover {
-    background: rgba(255, 50, 50, 0.03);
+    background: rgba(255, 50, 50, 0.04);
     color: rgba(255, 50, 50, 0.3);
-    border-color: rgba(255, 50, 50, 0.06);
+    border-color: rgba(255, 50, 50, 0.04);
 }
 
 /* ========================================
-   Forms - Bold Style
+   Forms - Glass Style
    ======================================== */
 
 .auth-form {
@@ -281,24 +318,23 @@ body::after {
 .form-group label {
     display: block;
     margin-bottom: 6px;
-    color: rgba(255, 255, 255, 0.15);
-    font-weight: 900;
-    font-size: 0.65em;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    font-family: 'Arial Black', sans-serif;
+    color: rgba(255, 255, 255, 0.2);
+    font-weight: 600;
+    font-size: 0.8em;
+    letter-spacing: 1px;
 }
 
 .form-group input {
     width: 100%;
     padding: 12px 16px;
     border: 1px solid rgba(255, 255, 255, 0.03);
-    border-radius: 0px;
+    border-radius: 14px;
     font-size: 1em;
     transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.01);
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     color: rgba(255, 255, 255, 0.6);
-    font-family: 'Arial', sans-serif;
 }
 
 .form-group input::placeholder {
@@ -307,16 +343,16 @@ body::after {
 
 .form-group input:focus {
     outline: none;
-    border-color: rgba(255, 50, 50, 0.1);
-    background: rgba(255, 255, 255, 0.02);
+    border-color: rgba(100, 50, 200, 0.15);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 0 40px rgba(100, 50, 200, 0.02);
 }
 
 .form-group small {
     display: block;
     margin-top: 5px;
     color: rgba(255, 255, 255, 0.05);
-    font-size: 0.6em;
-    font-family: 'Arial', sans-serif;
+    font-size: 0.7em;
 }
 
 .form-row {
@@ -339,12 +375,10 @@ body::after {
 .owner-link a {
     color: rgba(255, 255, 255, 0.08);
     text-decoration: none;
-    font-weight: 900;
+    font-weight: 600;
     transition: all 0.3s;
-    font-family: 'Arial Black', sans-serif;
-    font-size: 0.6em;
-    letter-spacing: 3px;
-    text-transform: uppercase;
+    font-size: 0.8em;
+    letter-spacing: 1px;
 }
 
 .owner-link a:hover {
@@ -356,12 +390,10 @@ body::after {
     margin-bottom: 20px;
     color: rgba(255, 255, 255, 0.08);
     text-decoration: none;
-    font-weight: 900;
+    font-weight: 600;
     transition: all 0.3s;
-    font-family: 'Arial Black', sans-serif;
-    font-size: 0.6em;
-    letter-spacing: 3px;
-    text-transform: uppercase;
+    font-size: 0.8em;
+    letter-spacing: 1px;
 }
 
 .back-home:hover {
@@ -369,7 +401,7 @@ body::after {
 }
 
 /* ========================================
-   Dashboard Header - Bold Style
+   Dashboard Header - Glass Style
    ======================================== */
 
 .dashboard-header {
@@ -391,50 +423,51 @@ body::after {
 }
 
 .owner-label {
-    font-weight: 900;
-    color: rgba(255, 255, 255, 0.05);
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.1);
     padding: 6px 18px;
-    font-size: 0.6em;
-    font-family: 'Arial Black', sans-serif;
-    letter-spacing: 3px;
-    text-transform: uppercase;
+    font-size: 0.8em;
+    letter-spacing: 1px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.02);
 }
 
 /* ========================================
-   Player Stats - Bold Style
+   Player Stats - Glass Style
    ======================================== */
 
 .player-stats {
-    background: rgba(255, 255, 255, 0.005);
-    border: 1px solid rgba(255, 255, 255, 0.02);
-    color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    color: rgba(255, 255, 255, 0.6);
     padding: 28px 32px;
+    border-radius: 18px;
     margin-bottom: 30px;
     position: relative;
     overflow: hidden;
 }
 
 .player-stats::before {
-    content: '◆';
+    content: '';
     position: absolute;
-    top: -20px;
-    right: -20px;
-    font-size: 100px;
-    opacity: 0.01;
-    color: #ff3333;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent);
 }
 
 .player-stats h2 {
     font-weight: 300;
-    letter-spacing: 2px;
     font-size: 1em;
-    font-family: 'Arial', sans-serif;
 }
 
 .player-stats h2 span {
-    font-weight: 900;
-    color: rgba(255, 255, 255, 0.6);
-    font-family: 'Arial Black', sans-serif;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .points-card {
@@ -447,44 +480,44 @@ body::after {
 .points-card h3 {
     font-weight: 300;
     opacity: 0.1;
-    font-size: 0.6em;
-    letter-spacing: 8px;
+    font-size: 0.7em;
+    letter-spacing: 6px;
     text-transform: uppercase;
-    font-family: 'Arial Black', sans-serif;
 }
 
 .points-value {
     font-size: 4.5em;
-    font-weight: 900;
-    color: rgba(255, 255, 255, 0.15);
-    font-family: 'Impact', 'Arial Black', sans-serif;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.2);
     animation: pulsePoints 3s ease-in-out infinite;
 }
 
 @keyframes pulsePoints {
-    0%, 100% { transform: scale(1); opacity: 0.15; }
-    50% { transform: scale(1.02); opacity: 0.2; }
+    0%, 100% { transform: scale(1); opacity: 0.2; }
+    50% { transform: scale(1.02); opacity: 0.25; }
 }
 
 /* ========================================
-   Submit Section - Bold Style
+   Submit Section - Glass Style
    ======================================== */
 
 .submit-section {
-    background: rgba(255, 255, 255, 0.005);
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     padding: 25px 30px;
+    border-radius: 18px;
     margin-bottom: 30px;
     border: 1px solid rgba(255, 255, 255, 0.02);
 }
 
 .submit-section h3 {
     margin-bottom: 10px;
-    color: rgba(255, 255, 255, 0.1);
-    font-weight: 900;
-    font-size: 0.7em;
-    letter-spacing: 6px;
+    color: rgba(255, 255, 255, 0.15);
+    font-weight: 600;
+    font-size: 0.8em;
+    letter-spacing: 4px;
     text-transform: uppercase;
-    font-family: 'Arial Black', sans-serif;
 }
 
 .submit-section input {
@@ -492,53 +525,54 @@ body::after {
     padding: 16px 20px;
     font-size: 1.2em;
     text-align: center;
-    letter-spacing: 10px;
+    letter-spacing: 8px;
     margin: 12px 0;
-    font-family: 'Impact', 'Arial Black', sans-serif;
+    font-family: 'Courier New', monospace;
     border: 1px solid rgba(255, 255, 255, 0.02);
-    border-radius: 0px;
+    border-radius: 14px;
     transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.005);
-    color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.01);
+    color: rgba(255, 255, 255, 0.4);
 }
 
 .submit-section input::placeholder {
-    color: rgba(255, 255, 255, 0.03);
+    color: rgba(255, 255, 255, 0.02);
 }
 
 .submit-section input:focus {
-    border-color: rgba(255, 50, 50, 0.05);
+    border-color: rgba(100, 50, 200, 0.08);
     outline: none;
-    background: rgba(255, 255, 255, 0.01);
+    background: rgba(255, 255, 255, 0.02);
 }
 
 /* ========================================
-   Messages - Bold Style
+   Messages - Glass Style
    ======================================== */
 
 .message {
     margin-top: 15px;
     padding: 14px 20px;
+    border-radius: 14px;
     text-align: center;
-    font-weight: 900;
+    font-weight: 600;
     animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: none;
-    font-family: 'Arial Black', sans-serif;
-    font-size: 0.7em;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+    font-size: 0.8em;
+    letter-spacing: 1px;
 }
 
 .message.success {
     display: block;
-    border: 1px solid rgba(0, 255, 0, 0.05);
-    color: rgba(0, 255, 0, 0.2);
+    background: rgba(0, 255, 0, 0.02);
+    border: 1px solid rgba(0, 255, 0, 0.03);
+    color: rgba(0, 255, 0, 0.15);
 }
 
 .message.error {
     display: block;
-    border: 1px solid rgba(255, 0, 0, 0.05);
-    color: rgba(255, 0, 0, 0.2);
+    background: rgba(255, 0, 0, 0.02);
+    border: 1px solid rgba(255, 0, 0, 0.03);
+    color: rgba(255, 0, 0, 0.15);
 }
 
 @keyframes slideIn {
@@ -590,7 +624,7 @@ body::after {
 }
 
 /* ========================================
-   List Items - Bold Style
+   List Items - Glass Style
    ======================================== */
 
 .history-item,
@@ -598,14 +632,16 @@ body::after {
 .snack-item,
 .submission-item,
 .player-item {
-    background: rgba(255, 255, 255, 0.005);
+    background: rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     padding: 14px 18px;
     margin: 10px 0;
+    border-radius: 14px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid rgba(255, 255, 255, 0.01);
     color: rgba(255, 255, 255, 0.2);
-    font-family: 'Arial', sans-serif;
-    font-size: 0.8em;
+    font-size: 0.85em;
 }
 
 .history-item:hover,
@@ -615,31 +651,32 @@ body::after {
 .player-item:hover {
     transform: translateX(5px);
     border-color: rgba(255, 255, 255, 0.02);
-    background: rgba(255, 255, 255, 0.01);
+    background: rgba(255, 255, 255, 0.02);
 }
 
 .history-item {
-    border-left: 2px solid rgba(0, 255, 0, 0.05);
+    border-left: 2px solid rgba(0, 255, 0, 0.03);
 }
 
 .history-item.failed {
-    border-left-color: rgba(255, 0, 0, 0.05);
+    border-left-color: rgba(255, 0, 0, 0.03);
 }
 
 .leaderboard-item:nth-child(1) {
     border-left: 2px solid rgba(255, 215, 0, 0.05);
+    background: rgba(255, 215, 0, 0.01);
 }
 
 .leaderboard-item:nth-child(2) {
-    border-left: 2px solid rgba(192, 192, 192, 0.03);
+    border-left: 2px solid rgba(192, 192, 192, 0.02);
 }
 
 .leaderboard-item:nth-child(3) {
-    border-left: 2px solid rgba(205, 127, 50, 0.03);
+    border-left: 2px solid rgba(205, 127, 50, 0.02);
 }
 
 /* ========================================
-   Owner Section - Bold Style
+   Owner Section - Glass Style
    ======================================== */
 
 .owner-section {
@@ -654,55 +691,61 @@ body::after {
 }
 
 .owner-section h2 {
-    color: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.1);
     margin-bottom: 18px;
     font-size: 0.9em;
     display: flex;
     align-items: center;
     gap: 12px;
     flex-wrap: wrap;
-    font-weight: 900;
-    font-family: 'Arial Black', sans-serif;
-    letter-spacing: 4px;
+    font-weight: 700;
+    letter-spacing: 3px;
     text-transform: uppercase;
 }
 
 .highlight-section {
-    background: rgba(255, 255, 255, 0.005);
+    background: rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.02);
+    border-radius: 18px;
     padding: 25px;
 }
 
 .badge {
-    background: rgba(255, 50, 50, 0.03);
-    color: rgba(255, 50, 50, 0.1);
+    background: rgba(100, 50, 200, 0.05);
+    color: rgba(100, 50, 200, 0.1);
     font-size: 0.4em;
     padding: 4px 14px;
-    font-weight: 900;
-    letter-spacing: 2px;
-    font-family: 'Arial Black', sans-serif;
+    border-radius: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border: 1px solid rgba(100, 50, 200, 0.03);
 }
 
 /* ========================================
-   Info Boxes - Bold Style
+   Info Boxes - Glass Style
    ======================================== */
 
 .info-box {
-    background: rgba(255, 255, 255, 0.005);
+    background: rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     padding: 16px 20px;
+    border-radius: 14px;
     margin-bottom: 20px;
     border-left: 2px solid rgba(255, 255, 255, 0.02);
 }
 
 .warning-box {
-    border-left-color: rgba(255, 215, 0, 0.05);
+    border-left-color: rgba(255, 215, 0, 0.03);
+    background: rgba(255, 215, 0, 0.01);
 }
 
 .info-box p {
     margin: 5px 0;
     color: rgba(255, 255, 255, 0.06);
-    font-size: 0.7em;
-    font-family: 'Arial', sans-serif;
+    font-size: 0.8em;
 }
 
 .info-box p strong {
@@ -719,7 +762,7 @@ body::after {
 }
 
 /* ========================================
-   Player Items - Bold Style
+   Player Items - Glass Style
    ======================================== */
 
 .player-item {
@@ -731,23 +774,24 @@ body::after {
 }
 
 .player-item button {
-    background: transparent;
-    color: rgba(255, 50, 50, 0.1);
+    background: rgba(255, 50, 50, 0.02);
+    color: rgba(255, 50, 50, 0.08);
     border: 1px solid rgba(255, 50, 50, 0.02);
     padding: 8px 18px;
-    border-radius: 0px;
+    border-radius: 10px;
     cursor: pointer;
-    font-weight: 900;
+    font-weight: 600;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    font-family: 'Arial Black', sans-serif;
-    font-size: 0.6em;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    font-size: 0.75em;
+    letter-spacing: 1px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .player-item button:hover {
-    background: rgba(255, 50, 50, 0.02);
+    background: rgba(255, 50, 50, 0.04);
     border-color: rgba(255, 50, 50, 0.04);
+    color: rgba(255, 50, 50, 0.15);
 }
 
 /* ========================================
@@ -755,18 +799,20 @@ body::after {
    ======================================== */
 
 .product-form {
-    background: rgba(255, 255, 255, 0.005);
+    background: rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     padding: 20px;
+    border-radius: 14px;
     margin-top: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.01);
 }
 
 .product-form h3 {
     margin-bottom: 15px;
     color: rgba(255, 255, 255, 0.06);
-    font-family: 'Arial Black', sans-serif;
-    font-size: 0.7em;
-    letter-spacing: 4px;
+    font-size: 0.8em;
+    letter-spacing: 3px;
     text-transform: uppercase;
 }
 
@@ -792,16 +838,11 @@ body::after {
 @media (max-width: 768px) {
     .container {
         padding: 18px;
+        border-radius: 18px;
     }
     
     .game-title {
-        font-size: 1.8em;
-        letter-spacing: 4px;
-    }
-    
-    .game-title::before,
-    .game-title::after {
-        display: none;
+        font-size: 2em;
     }
     
     .dashboard-grid {
@@ -847,19 +888,14 @@ body::after {
     
     .container {
         padding: 12px;
+        border-radius: 14px;
     }
     
     .game-title {
-        font-size: 1.4em;
-        letter-spacing: 2px;
+        font-size: 1.6em;
     }
     
     .points-value {
         font-size: 2.2em;
-    }
-    
-    .sub-title {
-        font-size: 0.5em;
-        letter-spacing: 6px;
     }
 }
