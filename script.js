@@ -1,13 +1,16 @@
 // ========================================
+// ROADFIVE - Main Application
+// Complete with Edit & Remove Products
+// ========================================
+
+// ========================================
 // RENDER API CONFIGURATION
 // ========================================
 
-// Use Render URL or localhost for testing
 const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
     ? 'http://localhost:3000/api/data'
     : '/api/data';
 
-// Save all data to server
 async function saveAllData() {
     const data = {
         owner: JSON.parse(localStorage.getItem('owner')),
@@ -30,7 +33,6 @@ async function saveAllData() {
     }
 }
 
-// Load all data from server
 async function loadAllData() {
     try {
         const response = await fetch(API_URL);
@@ -51,39 +53,14 @@ async function loadAllData() {
     return false;
 }
 
-// Auto-save every 30 seconds
 setInterval(saveAllData, 30000);
-
-// Save when page closes
 window.addEventListener('beforeunload', saveAllData);
-
-// Load data on page load
-window.addEventListener('load', async function() {
-    await loadAllData();
-    // Your existing onload code will run after this
-});
-
-
-
-
-
-
-
-
-
-
-
-// ========================================
-// ROADFIVE - Main Application
-// Complete Polished Version
-// ========================================
 
 // ========================================
 // INITIALIZATION
 // ========================================
 
 function initializeData() {
-    // Only create owner if it doesn't exist
     if (!localStorage.getItem('owner')) {
         localStorage.setItem('owner', JSON.stringify({
             username: 'roadfive_owner',
@@ -93,7 +70,6 @@ function initializeData() {
         }));
     }
     
-    // Initialize empty arrays if they don't exist
     if (!localStorage.getItem('users')) {
         localStorage.setItem('users', JSON.stringify([]));
     }
@@ -114,10 +90,8 @@ function initializeData() {
 window.onload = function() {
     initializeData();
     
-    // Load data from server (only on Render)
     if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
         loadAllData().then(() => {
-            // After loading, set up the page
             setupPage();
         });
     } else {
@@ -148,6 +122,7 @@ function setupPage() {
         loadOwnerDashboard();
     }
 }
+
 // ========================================
 // PLAYER AUTHENTICATION
 // ========================================
@@ -233,18 +208,16 @@ function loadPlayerDashboard() {
 
 function submitCombination(e) {
     e.preventDefault();
-    const code = document.getElementById('combination').value.trim();
+    const code = document.getElementById('combination').value.trim().toUpperCase();
     const player = JSON.parse(localStorage.getItem('currentPlayer'));
     
-    // Validate 12 alphanumeric characters (letters AND numbers)
-if (!/^[A-Za-z0-9]{12}$/.test(code)) {
-    showMessage('❌ Must be exactly 12 characters (letters or numbers)', 'error');
-    document.getElementById('combination').value = '';
-    document.getElementById('combination').focus();
-    return;
-}
+    if (!/^[A-Z0-9]{12}$/.test(code)) {
+        showMessage('❌ Must be exactly 12 characters (letters or numbers)', 'error');
+        document.getElementById('combination').value = '';
+        document.getElementById('combination').focus();
+        return;
+    }
     
-    // Check if product exists
     const snacks = JSON.parse(localStorage.getItem('snacks'));
     const match = snacks.find(s => s.combination === code);
     
@@ -256,7 +229,6 @@ if (!/^[A-Za-z0-9]{12}$/.test(code)) {
         return;
     }
     
-    // Award points
     const users = JSON.parse(localStorage.getItem('users'));
     const idx = users.findIndex(u => u.id === player.id);
     users[idx].points += match.points;
@@ -264,8 +236,6 @@ if (!/^[A-Za-z0-9]{12}$/.test(code)) {
     localStorage.setItem('currentPlayer', JSON.stringify(users[idx]));
     
     saveSubmission(player.id, code, match.id, match.points, true);
-    
-    // Show success
     showSuccessMessage(match);
     
     document.getElementById('totalPoints').textContent = users[idx].points;
@@ -425,19 +395,18 @@ function loadOwnerDashboard() {
 function addProduct(e) {
     e.preventDefault();
     const name = document.getElementById('snackName').value.trim();
-    const combo = document.getElementById('snackCombination').value.trim();
+    const combo = document.getElementById('snackCombination').value.trim().toUpperCase();
     const points = parseInt(document.getElementById('snackPoints').value);
     
-    // Validation
     if (!name) {
         showOwnerMessage('❌ Please enter a product name', 'error');
         return;
     }
     
-   if (!/^[A-Za-z0-9]{12}$/.test(combo)) {
-    showOwnerMessage('❌ Code must be exactly 12 characters (letters or numbers)', 'error');
-    return;
-}
+    if (!/^[A-Z0-9]{12}$/.test(combo)) {
+        showOwnerMessage('❌ Code must be exactly 12 characters (letters or numbers)', 'error');
+        return;
+    }
     
     if (!points || points < 1) {
         showOwnerMessage('❌ Points must be at least 1', 'error');
@@ -451,12 +420,6 @@ function addProduct(e) {
         return;
     }
     
-    if (snacks.find(s => s.name.toLowerCase() === name.toLowerCase())) {
-        showOwnerMessage('❌ A product with this name already exists', 'error');
-        return;
-    }
-    
-    // Add product
     snacks.push({
         id: Date.now(),
         name: name,
@@ -466,11 +429,14 @@ function addProduct(e) {
     });
     
     localStorage.setItem('snacks', JSON.stringify(snacks));
-    
     showOwnerMessage(`✅ "${name}" added! Code: ${combo} | Points: ${points}`, 'success');
     document.getElementById('addSnackForm').reset();
     loadProductsList();
 }
+
+// ========================================
+// PRODUCTS LIST WITH EDIT & REMOVE
+// ========================================
 
 function loadProductsList() {
     const snacks = JSON.parse(localStorage.getItem('snacks'));
@@ -487,13 +453,111 @@ function loadProductsList() {
     }
     
     div.innerHTML = snacks.map((s, i) => `
-        <div class="snack-item">
-            <strong>#${i + 1} 🍔 ${s.name}</strong><br>
-            🔢 Code: <strong style="font-family:monospace;font-size:1.2em;">${s.combination}</strong><br>
-            ⭐ Points: ${s.points}<br>
-            📅 Added: ${s.created || 'Unknown'}
+        <div class="snack-item" id="product-${s.id}">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                <div>
+                    <strong>#${i + 1} 🍔 ${s.name}</strong><br>
+                    🔢 Code: <strong style="font-family:monospace;font-size:1.2em;">${s.combination}</strong><br>
+                    ⭐ Points: ${s.points}<br>
+                    📅 Added: ${s.created || 'Unknown'}
+                </div>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <button onclick="editProduct(${s.id})" class="btn-edit">✏️ Edit</button>
+                    <button onclick="removeProduct(${s.id})" class="btn-remove">🗑️ Remove</button>
+                </div>
+            </div>
         </div>
     `).join('');
+}
+
+// ========================================
+// EDIT PRODUCT (Owner Only)
+// ========================================
+
+function editProduct(productId) {
+    const snacks = JSON.parse(localStorage.getItem('snacks'));
+    const product = snacks.find(s => s.id === productId);
+    
+    if (!product) {
+        showOwnerMessage('❌ Product not found', 'error');
+        return;
+    }
+    
+    const newName = prompt('✏️ Edit Product Name:', product.name);
+    if (newName === null) return;
+    if (!newName.trim()) {
+        showOwnerMessage('❌ Product name cannot be empty', 'error');
+        return;
+    }
+    
+    const newCode = prompt('✏️ Edit 12-Character Code (letters & numbers):', product.combination);
+    if (newCode === null) return;
+    const cleanCode = newCode.trim().toUpperCase();
+    if (!/^[A-Z0-9]{12}$/.test(cleanCode)) {
+        showOwnerMessage('❌ Code must be exactly 12 characters (letters or numbers)', 'error');
+        return;
+    }
+    
+    const existingProduct = snacks.find(s => s.combination === cleanCode && s.id !== productId);
+    if (existingProduct) {
+        showOwnerMessage('❌ This code is already used by another product', 'error');
+        return;
+    }
+    
+    const newPoints = prompt('✏️ Edit Points Value:', product.points);
+    if (newPoints === null) return;
+    if (isNaN(newPoints) || parseInt(newPoints) < 1) {
+        showOwnerMessage('❌ Points must be at least 1', 'error');
+        return;
+    }
+    
+    const index = snacks.findIndex(s => s.id === productId);
+    snacks[index] = {
+        ...product,
+        name: newName.trim(),
+        combination: cleanCode,
+        points: parseInt(newPoints),
+        lastEdited: new Date().toLocaleString()
+    };
+    
+    localStorage.setItem('snacks', JSON.stringify(snacks));
+    showOwnerMessage(`✅ "${newName.trim()}" updated successfully!`, 'success');
+    loadProductsList();
+}
+
+// ========================================
+// REMOVE PRODUCT (Owner Only)
+// ========================================
+
+function removeProduct(productId) {
+    const snacks = JSON.parse(localStorage.getItem('snacks'));
+    const product = snacks.find(s => s.id === productId);
+    
+    if (!product) {
+        showOwnerMessage('❌ Product not found', 'error');
+        return;
+    }
+    
+    const submissions = JSON.parse(localStorage.getItem('submissions'));
+    const usedSubmissions = submissions.filter(s => s.snackId === productId && s.isSuccess === true);
+    
+    let confirmMessage = `⚠️ Remove "${product.name}"?`;
+    if (usedSubmissions.length > 0) {
+        confirmMessage += `\n\n⚠️ Used ${usedSubmissions.length} times by players.\nAll associated submissions will be removed.`;
+    }
+    confirmMessage += `\n\nThis cannot be undone!`;
+    
+    if (!confirm(confirmMessage)) return;
+    
+    const updatedSnacks = snacks.filter(s => s.id !== productId);
+    localStorage.setItem('snacks', JSON.stringify(updatedSnacks));
+    
+    const updatedSubmissions = submissions.filter(s => s.snackId !== productId);
+    localStorage.setItem('submissions', JSON.stringify(updatedSubmissions));
+    
+    showOwnerMessage(`✅ "${product.name}" removed!`, 'success');
+    loadProductsList();
+    loadAllSubmissions();
 }
 
 // ========================================
@@ -567,103 +631,6 @@ function loadAllSubmissions() {
             </div>
         `;
     }).join('');
-}
-// ========================================
-// EDIT PRODUCT (Owner Only)
-// ========================================
-
-function editProduct(productId) {
-    const snacks = JSON.parse(localStorage.getItem('snacks'));
-    const product = snacks.find(s => s.id === productId);
-    
-    if (!product) {
-        showOwnerMessage('❌ Product not found', 'error');
-        return;
-    }
-    
-    // Edit Product Name
-    const newName = prompt('✏️ Edit Product Name:', product.name);
-    if (newName === null) return;
-    if (!newName.trim()) {
-        showOwnerMessage('❌ Product name cannot be empty', 'error');
-        return;
-    }
-    
-    // Edit Code
-    const newCode = prompt('✏️ Edit 12-Character Code (letters & numbers):', product.combination);
-    if (newCode === null) return;
-    const cleanCode = newCode.trim().toUpperCase();
-    if (!/^[A-Z0-9]{12}$/.test(cleanCode)) {
-        showOwnerMessage('❌ Code must be exactly 12 characters (letters or numbers)', 'error');
-        return;
-    }
-    
-    // Check if code is already used
-    const existingProduct = snacks.find(s => s.combination === cleanCode && s.id !== productId);
-    if (existingProduct) {
-        showOwnerMessage('❌ This code is already used by another product', 'error');
-        return;
-    }
-    
-    // Edit Points
-    const newPoints = prompt('✏️ Edit Points Value:', product.points);
-    if (newPoints === null) return;
-    if (isNaN(newPoints) || parseInt(newPoints) < 1) {
-        showOwnerMessage('❌ Points must be at least 1', 'error');
-        return;
-    }
-    
-    // Update product
-    const index = snacks.findIndex(s => s.id === productId);
-    snacks[index] = {
-        ...product,
-        name: newName.trim(),
-        combination: cleanCode,
-        points: parseInt(newPoints),
-        lastEdited: new Date().toLocaleString()
-    };
-    
-    localStorage.setItem('snacks', JSON.stringify(snacks));
-    showOwnerMessage(`✅ "${newName.trim()}" updated successfully!`, 'success');
-    loadProductsList();
-}
-
-// ========================================
-// REMOVE PRODUCT (Owner Only)
-// ========================================
-
-function removeProduct(productId) {
-    const snacks = JSON.parse(localStorage.getItem('snacks'));
-    const product = snacks.find(s => s.id === productId);
-    
-    if (!product) {
-        showOwnerMessage('❌ Product not found', 'error');
-        return;
-    }
-    
-    // Check if product has been used
-    const submissions = JSON.parse(localStorage.getItem('submissions'));
-    const usedSubmissions = submissions.filter(s => s.snackId === productId && s.isSuccess === true);
-    
-    let confirmMessage = `⚠️ Remove "${product.name}"?`;
-    if (usedSubmissions.length > 0) {
-        confirmMessage += `\n\n⚠️ Used ${usedSubmissions.length} times by players.\nAll associated submissions will be removed.`;
-    }
-    confirmMessage += `\n\nThis cannot be undone!`;
-    
-    if (!confirm(confirmMessage)) return;
-    
-    // Remove product
-    const updatedSnacks = snacks.filter(s => s.id !== productId);
-    localStorage.setItem('snacks', JSON.stringify(updatedSnacks));
-    
-    // Remove associated submissions
-    const updatedSubmissions = submissions.filter(s => s.snackId !== productId);
-    localStorage.setItem('submissions', JSON.stringify(updatedSubmissions));
-    
-    showOwnerMessage(`✅ "${product.name}" removed!`, 'success');
-    loadProductsList();
-    loadAllSubmissions();
 }
 
 function showOwnerMessage(msg, type) {
