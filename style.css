@@ -1,5 +1,5 @@
 /* ========================================
-   ROADFIVE - Medium Deep Theme with Subtle Shadows
+   ROADFIVE - Complete Styles
    ======================================== */
 
 * {
@@ -120,6 +120,46 @@ body {
 }
 
 /* ========================================
+   Edit & Remove Buttons
+   ======================================== */
+
+.btn-edit {
+    background: linear-gradient(135deg, #2c3e7a 0%, #4a2c6a 100%);
+    color: #ffffff;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85em;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(44, 62, 122, 0.25);
+}
+
+.btn-edit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(44, 62, 122, 0.35);
+}
+
+.btn-remove {
+    background: linear-gradient(135deg, #8b0000 0%, #cc0000 100%);
+    color: #ffffff;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85em;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(204, 0, 0, 0.25);
+}
+
+.btn-remove:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(204, 0, 0, 0.35);
+}
+
+/* ========================================
    Forms
    ======================================== */
 
@@ -154,6 +194,13 @@ body {
     outline: none;
     border-color: #4a2c6a;
     box-shadow: 0 0 0 4px rgba(74, 44, 106, 0.1);
+}
+
+.form-group small {
+    display: block;
+    margin-top: 5px;
+    color: #888;
+    font-size: 0.8em;
 }
 
 .form-row {
@@ -547,6 +594,37 @@ body {
     margin-top: 10px;
 }
 
+.product-form h3 {
+    margin-bottom: 15px;
+    color: #2c3e7a;
+}
+
+/* ========================================
+   Snack Item with Edit/Remove
+   ======================================== */
+
+.snack-item {
+    background: #faf8fc;
+    padding: 14px 18px;
+    margin: 10px 0;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    border: 1px solid #ece8f0;
+    border-left: 4px solid #28a745;
+}
+
+.snack-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 3px 15px rgba(44, 62, 122, 0.08);
+    border-color: #c8bcd8;
+}
+
+.snack-item .actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
 /* ========================================
    Placeholder Text
    ======================================== */
@@ -628,59 +706,4 @@ body {
     .points-value {
         font-size: 2.2em;
     }
-}
-
-/* ========================================
-   Edit & Remove Buttons
-   ======================================== */
-
-.btn-edit {
-    background: linear-gradient(135deg, #2c3e7a 0%, #4a2c6a 100%);
-    color: #ffffff;
-    border: none;
-    padding: 6px 14px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 0.85em;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(44, 62, 122, 0.25);
-}
-
-.btn-edit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(44, 62, 122, 0.35);
-}
-
-.btn-remove {
-    background: linear-gradient(135deg, #8b0000 0%, #cc0000 100%);
-    color: #ffffff;
-    border: none;
-    padding: 6px 14px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 0.85em;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(204, 0, 0, 0.25);
-}
-
-.btn-remove:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(204, 0, 0, 0.35);
-}
-
-.snack-item {
-    background: #faf8fc;
-    padding: 14px 18px;
-    margin: 10px 0;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    border: 1px solid #ece8f0;
-}
-
-.snack-item:hover {
-    transform: translateX(5px);
-    box-shadow: 0 3px 15px rgba(44, 62, 122, 0.08);
-    border-color: #c8bcd8;
 }
