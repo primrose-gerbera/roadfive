@@ -1,14 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROADFIVE</title>
-    <script>
-        window.location.href = "login.html";
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ROADFIVE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --gold: #F5C518;
+  --purple: #6C3FC5;
+  --bg: #0A0A10;
+  --card: rgba(15, 12, 30, 0.78);
+  --border: rgba(255,255,255,0.10);
+  --text: #E0D9F5;
+}
+html, body {
+  height: 100%;
+  background: var(--bg);
+  font-family: 'Inter', sans-serif;
+  color: var(--text);
+  overflow: hidden;
+}
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes float {
+  0%,100% { transform: translateX(-50%) translateY(0px); }
+  50% { transform: translateX(-50%) translateY(-10px); }
+}
+@keyframes floatSlow {
+  0%,100% { transform: translateX(-50%) translateY(0px) rotate(0deg); }
+  50% { transform: translateX(-50%) translateY(-5px) rotate(2deg); }
+}
+
+.scene {
+  position: fixed; inset: 0;
+  display: flex; align-items: flex-end; justify-content: center;
+  z-index: 0; pointer-events: none;
+}
+.atmosphere {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 55% at 50% 78%, rgba(140,50,160,0.55) 0%, transparent 70%),
+    linear-gradient(to bottom, #0A0A10 0%, #1A0D2E 50%, #0A0A10 100%);
+}
+.sun {
+  position: absolute;
+  bottom: 18%; left: 50%;
+  transform: translateX(-50%);
+  width: 340px; height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 60%,
+    #FFD966 0%, #E8872A 28%, #A8246A 55%, transparent 72%);
+  filter: blur(2px); opacity: 0.92;
+  animation: floatSlow 6s ease-in-out infinite;
+}
+.ship {
+  position: absolute;
+  bottom: calc(18% + 148px); left: 50%;
+  transform: translateX(-50%);
+  width: 190px; opacity: 0.35;
+  animation: float 4s ease-in-out infinite;
+}
+.horizon {
+  position: absolute;
+  bottom: 18%; left: 10%; right: 10%;
+  height: 1px;
+  background: linear-gradient(to right,
+    transparent, rgba(245,197,24,0.45) 20%,
+    rgba(245,197,24,0.45) 80%, transparent);
+}
+.ship-svg { width: 100%; height: 100%; fill: rgba(200,190,230,0.5); }
+
+.glass-container {
+  position: relative; z-index: 10;
+  max-width: 600px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 50px 40px;
+  text-align: center;
+  backdrop-filter: blur(22px);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.65);
+  animation: fadeInUp 0.8s cubic-bezier(0.4,0,0.2,1);
+}
+.game-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 4em;
+  letter-spacing: 0.12em;
+  color: #fff;
+  text-shadow: 0 0 24px rgba(245,197,24,0.35);
+}
+.tagline {
+  font-size: 12px;
+  letter-spacing: 0.30em;
+  color: rgba(200,190,230,0.50);
+  text-transform: uppercase;
+  margin: 10px 0 30px;
+}
+.subtitle {
+  font-size: 0.95em;
+  color: var(--text);
+  opacity: 0.6;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+.btn {
+  padding: 14px 40px;
+  font-size: 1em;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 600;
+  display: inline-block;
+  text-decoration: none;
+  margin: 8px 10px;
+}
+.btn-primary {
+  background: linear-gradient(135deg, #7B4FD8 0%, #5830A0 100%);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(108,63,197,0.40);
+}
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 35px rgba(108,63,197,0.60);
+}
+.btn-secondary {
+  background: rgba(255,255,255,0.05);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-secondary:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-3px);
+}
+.buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+</style>
 </head>
 <body>
-    <p>Redirecting to ROADFIVE...</p>
+
+<div class="scene">
+  <div class="atmosphere"></div>
+  <div class="sun"></div>
+  <div class="ship">
+    <svg class="ship-svg" viewBox="0 0 190 120" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 80 Q95 110 170 80 L160 95 Q95 120 30 95 Z" fill="rgba(180,160,220,0.4)"/>
+      <rect x="55" y="50" width="80" height="35" rx="6" fill="rgba(180,160,220,0.25)"/>
+      <ellipse cx="95" cy="50" rx="28" ry="18" fill="rgba(108,63,197,0.3)"/>
+      <ellipse cx="95" cy="50" rx="18" ry="11" fill="rgba(200,190,255,0.08)"/>
+      <path d="M55 75 L10 95 L40 78 Z" fill="rgba(180,160,220,0.2)"/>
+      <path d="M135 75 L180 95 L150 78 Z" fill="rgba(180,160,220,0.2)"/>
+      <ellipse cx="72" cy="87" rx="6" ry="4" fill="rgba(245,197,24,0.25)"/>
+      <ellipse cx="118" cy="87" rx="6" ry="4" fill="rgba(245,197,24,0.25)"/>
+      <line x1="95" y1="32" x2="95" y2="18" stroke="rgba(200,190,230,0.3)" stroke-width="1.5"/>
+      <circle cx="95" cy="16" r="3" fill="rgba(245,197,24,0.5)"/>
+    </svg>
+  </div>
+  <div class="horizon"></div>
+</div>
+
+<div class="glass-container">
+  <div class="game-title">ROADFIVE</div>
+  <div class="tagline">Interstellar Rewards Protocol</div>
+  <div class="subtitle">
+    Join the crew, earn rewards, and climb the leaderboard.<br>
+    Your journey to the stars starts here.
+  </div>
+  <div class="buttons">
+    <a href="register.html" class="btn btn-primary">🚀 Sign Up</a>
+    <a href="login.html" class="btn btn-secondary">Sign In</a>
+  </div>
+</div>
+
+<script>
+// Check if user is already logged in
+const currentUser = JSON.parse(localStorage.getItem('roadfive_current_user'));
+if (currentUser) {
+  // Redirect to dashboard if already logged in
+  window.location.href = 'player-dashboard.html';
+}
+</script>
 </body>
 </html>
