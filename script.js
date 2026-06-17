@@ -90,7 +90,6 @@ function initializeData() {
 window.onload = function() {
     initializeData();
     
-    // Load data from server (only on Render)
     if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
         loadAllData().then(() => {
             setupPage();
@@ -109,7 +108,6 @@ function setupPage() {
         if (loginBtn) {
             loginBtn.addEventListener('click', handlePlayerLogin);
         }
-        // Also handle enter key
         const passwordField = document.getElementById('password');
         if (passwordField) {
             passwordField.addEventListener('keypress', function(e) {
@@ -134,7 +132,6 @@ function setupPage() {
         if (ownerLoginBtn) {
             ownerLoginBtn.addEventListener('click', handleOwnerLogin);
         }
-        // Also handle enter key
         const ownerPassword = document.getElementById('ownerPassword');
         if (ownerPassword) {
             ownerPassword.addEventListener('keypress', function(e) {
