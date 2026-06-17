@@ -6,7 +6,7 @@
     <title>ROADFIVE – Owner Login</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -28,6 +28,31 @@
             font-family: 'Inter', sans-serif;
             color: var(--text);
             overflow: hidden;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px) scale(0.96); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-6px) rotate(2deg); }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 4px 20px rgba(108,63,197,0.40); }
+            50% { box-shadow: 0 4px 50px rgba(108,63,197,0.70); }
         }
 
         .scene {
@@ -55,6 +80,7 @@
                 transparent 72%);
             filter: blur(2px);
             opacity: 0.92;
+            animation: floatSlow 8s ease-in-out infinite;
         }
 
         .atmosphere {
@@ -74,6 +100,7 @@
             transform: translateX(-50%);
             width: 190px;
             opacity: 0.35;
+            animation: float 5s ease-in-out infinite;
         }
 
         .horizon {
@@ -97,6 +124,7 @@
             color: rgba(220,210,240,0.18);
             white-space: nowrap;
             font-weight: 300;
+            animation: fadeInUp 2s ease;
         }
 
         .stage {
@@ -113,14 +141,24 @@
             max-width: 92vw;
             background: var(--card);
             border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 44px 40px 40px;
-            backdrop-filter: blur(22px) saturate(1.4);
-            -webkit-backdrop-filter: blur(22px) saturate(1.4);
+            border-radius: 24px;
+            padding: 48px 40px 40px;
+            backdrop-filter: blur(24px) saturate(1.5);
+            -webkit-backdrop-filter: blur(24px) saturate(1.5);
             box-shadow:
                 0 0 0 1px rgba(108,63,197,0.18),
-                0 24px 64px rgba(0,0,0,0.65),
+                0 30px 80px rgba(0,0,0,0.65),
                 0 0 80px rgba(108,63,197,0.12) inset;
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow:
+                0 0 0 1px rgba(108,63,197,0.25),
+                0 35px 90px rgba(0,0,0,0.70),
+                0 0 80px rgba(108,63,197,0.15) inset;
         }
 
         .brand {
@@ -132,118 +170,157 @@
         }
 
         .brand-lock {
-            font-size: 40px;
+            font-size: 44px;
             line-height: 1;
-            filter: drop-shadow(0 0 10px rgba(245,197,24,0.5));
+            filter: drop-shadow(0 0 20px rgba(245,197,24,0.4));
+            animation: float 4s ease-in-out infinite;
         }
 
         .brand-name {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 38px;
-            letter-spacing: 0.12em;
+            font-size: 40px;
+            letter-spacing: 0.14em;
             color: #fff;
-            text-shadow: 0 0 24px rgba(245,197,24,0.35);
+            text-shadow: 0 0 30px rgba(245,197,24,0.3);
+            animation: fadeInDown 0.6s ease;
         }
 
         .brand-sub {
             font-size: 10px;
-            letter-spacing: 0.30em;
+            letter-spacing: 0.35em;
             color: var(--muted);
             text-transform: uppercase;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
         }
 
-        .field { margin-bottom: 18px; }
+        .field {
+            margin-bottom: 18px;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .field:nth-child(1) { animation-delay: 0.15s; }
+        .field:nth-child(2) { animation-delay: 0.25s; }
 
         label {
             display: block;
             font-size: 11px;
-            letter-spacing: 0.12em;
+            letter-spacing: 0.14em;
             color: var(--muted);
             margin-bottom: 7px;
             text-transform: uppercase;
+            font-weight: 500;
         }
 
         input {
             width: 100%;
             background: var(--input);
             border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 13px 16px;
+            border-radius: 12px;
+            padding: 14px 18px;
             font-size: 15px;
             color: #fff;
             outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         input::placeholder { color: rgba(255,255,255,0.25); }
 
         input:focus {
             border-color: var(--purple);
-            box-shadow: 0 0 0 3px rgba(108,63,197,0.22);
+            box-shadow: 0 0 0 4px rgba(108,63,197,0.15);
+            transform: scale(1.01);
         }
 
         .btn-login {
             display: block;
             width: 100%;
-            margin-top: 26px;
-            padding: 14px;
+            margin-top: 28px;
+            padding: 15px;
             border: none;
-            border-radius: 12px;
+            border-radius: 14px;
             background: linear-gradient(135deg, #7B4FD8 0%, #5830A0 100%);
             color: #fff;
             font-family: 'Inter', sans-serif;
             font-size: 15px;
             font-weight: 600;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.06em;
             cursor: pointer;
-            transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             box-shadow: 0 4px 20px rgba(108,63,197,0.40);
+            opacity: 0;
+            animation: fadeInUp 0.6s ease 0.35s forwards, pulseGlow 3s ease-in-out infinite 0.5s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-login::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+            transition: left 0.6s;
+        }
+
+        .btn-login:hover::after {
+            left: 100%;
         }
 
         .btn-login:hover {
-            opacity: 0.92;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 28px rgba(108,63,197,0.55);
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 6px 35px rgba(108,63,197,0.60);
         }
 
-        .btn-login:active { transform: translateY(0); }
+        .btn-login:active {
+            transform: translateY(0) scale(0.98);
+        }
 
         .card-footer {
             margin-top: 22px;
             text-align: center;
             font-size: 13px;
             color: var(--muted);
+            opacity: 0;
+            animation: fadeInUp 0.6s ease 0.4s forwards;
         }
 
         .card-footer a {
             color: var(--gold);
             text-decoration: none;
             font-weight: 500;
-            transition: opacity 0.2s;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
-        .card-footer a:hover { opacity: 0.75; }
-
-        .back-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            margin-top: 14px;
-            font-size: 12px;
-            color: var(--muted);
-            opacity: 0.65;
-            cursor: pointer;
-            transition: opacity 0.2s;
-            text-decoration: none;
+        .card-footer a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s ease;
         }
 
-        .back-link:hover { opacity: 1; }
+        .card-footer a:hover::after {
+            width: 100%;
+        }
+
+        .card-footer a:hover {
+            opacity: 0.75;
+        }
 
         .divider {
             border: none;
             border-top: 1px solid var(--border);
-            margin: 16px 0 14px;
+            margin: 18px 0 14px;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease 0.35s forwards;
         }
 
         @media (max-width: 480px) {
