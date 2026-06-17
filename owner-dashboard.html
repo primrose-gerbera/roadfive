@@ -1,13 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROADFIVE - Owner Panel</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>ROADFIVE – Owner Panel</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+
+    <div class="scene">
+        <div class="atmosphere"></div>
+        <div class="sun"></div>
+        <svg class="ship" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 140 Q100 155 170 140 L160 165 Q100 178 40 165 Z" fill="#1a0d2e"/>
+            <rect x="55" y="110" width="90" height="32" rx="4" fill="#1a0d2e"/>
+            <circle cx="75" cy="126" r="5" fill="#2d1a4a"/>
+            <circle cx="100" cy="126" r="5" fill="#2d1a4a"/>
+            <circle cx="125" cy="126" r="5" fill="#2d1a4a"/>
+            <circle cx="100" cy="126" r="4" fill="#3a2460"/>
+            <rect x="98" y="30" width="4" height="82" fill="#1a0d2e"/>
+            <rect x="70" y="50" width="3" height="62" fill="#1a0d2e"/>
+            <rect x="128" y="60" width="3" height="52" fill="#1a0d2e"/>
+            <path d="M102 32 Q130 55 130 85 L102 85 Z" fill="#1a0d2e" opacity="0.9"/>
+            <path d="M98 32 Q70 55 70 85 L98 85 Z" fill="#1a0d2e" opacity="0.9"/>
+            <path d="M102 32 Q118 42 118 58 L102 58 Z" fill="#1a0d2e"/>
+            <path d="M98 32 Q82 42 82 58 L98 58 Z" fill="#1a0d2e"/>
+            <path d="M73 52 Q90 65 90 82 L73 82 Z" fill="#1a0d2e" opacity="0.85"/>
+            <path d="M131 62 Q146 72 146 88 L131 88 Z" fill="#1a0d2e" opacity="0.8"/>
+            <path d="M102 30 L116 22 L102 26 Z" fill="#1a0d2e"/>
+            <path d="M98 30 L84 20 L98 25 Z" fill="#1a0d2e"/>
+            <line x1="55" y1="112" x2="20" y2="95" stroke="#1a0d2e" stroke-width="3"/>
+            <path d="M20 95 Q36 104 55 112 L50 100 Z" fill="#1a0d2e" opacity="0.7"/>
+            <rect x="93" y="55" width="14" height="8" rx="2" fill="#1a0d2e"/>
+            <circle cx="113" cy="22" r="4" fill="#1a0d2e"/>
+            <line x1="110" y1="26" x2="116" y2="30" stroke="#1a0d2e" stroke-width="1.5"/>
+            <line x1="116" y1="26" x2="110" y2="30" stroke="#1a0d2e" stroke-width="1.5"/>
+        </svg>
+        <div class="horizon"></div>
+        <p class="tagline">weapon of mass distribution</p>
+    </div>
+
+    <div class="glass-container">
         <div class="dashboard-header">
             <h1 class="game-title">👑 Owner Panel</h1>
             <div class="header-actions">
@@ -17,7 +50,6 @@
             </div>
         </div>
 
-        <!-- PRODUCT MANAGEMENT -->
         <div class="owner-section highlight-section">
             <h2>🏷️ Product Management <span class="badge">OWNER ONLY</span></h2>
             
@@ -51,31 +83,28 @@
             <div id="ownerMessage" class="message"></div>
         </div>
 
-        <!-- PRODUCTS LIST WITH EDIT & REMOVE -->
         <div class="owner-section">
             <h2>📋 Products & Codes</h2>
             <div id="snacksList" class="snacks-list">
-                <p>Loading...</p>
+                <p style="color:rgba(255,255,255,0.05); text-align:center;">Loading...</p>
             </div>
         </div>
 
-        <!-- CUSTOMER MANAGEMENT -->
         <div class="owner-section">
             <h2>👥 Customers</h2>
             <div id="playersList" class="players-list">
-                <p>Loading...</p>
+                <p style="color:rgba(255,255,255,0.05); text-align:center;">Loading...</p>
             </div>
         </div>
 
-        <!-- SUBMISSIONS -->
         <div class="owner-section">
             <h2>📊 Submissions</h2>
             <div id="allSubmissions" class="submissions-list">
-                <p>Loading...</p>
+                <p style="color:rgba(255,255,255,0.05); text-align:center;">Loading...</p>
             </div>
         </div>
     </div>
-    
+
     <script src="script.js"></script>
 </body>
 </html>
