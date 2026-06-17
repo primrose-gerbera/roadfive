@@ -1,8 +1,8 @@
 /* ========================================
-   ROADFIVE - Glass Theme with GitHub-Style Animations
+   ROADFIVE - Glass Theme with Premium Animations
    ======================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 * {
     margin: 0;
@@ -36,210 +36,74 @@ body {
     background: var(--bg);
 }
 
-/* ── ANIMATIONS ────────────────────────────────────────── */
+/* ── PREMIUM ANIMATIONS ────────────────────────────────────── */
 
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px) scale(0.98);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
+    from { opacity: 0; transform: translateY(40px) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 @keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-30px) scale(0.98);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(-40px); }
+    to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes fadeInRight {
-    from {
-        opacity: 0;
-        transform: translateX(40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(40px); }
+    to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes scaleIn {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@keyframes pulseGlow {
-    0%, 100% {
-        box-shadow: 0 4px 20px rgba(108,63,197,0.40);
-    }
-    50% {
-        box-shadow: 0 4px 40px rgba(108,63,197,0.70);
-    }
-}
-
-@keyframes shimmer {
-    0% {
-        background-position: -200% center;
-    }
-    100% {
-        background-position: 200% center;
-    }
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 @keyframes float {
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
 }
 
 @keyframes floatSlow {
-    0%, 100% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(-5px) rotate(2deg);
-    }
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-6px) rotate(2deg); }
 }
 
-@keyframes pulsePoints {
-    0%, 100% {
-        transform: scale(1);
-        opacity: 0.2;
-    }
-    50% {
-        transform: scale(1.05);
-        opacity: 0.3;
-    }
+@keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 4px 20px rgba(108,63,197,0.40); }
+    50% { box-shadow: 0 4px 50px rgba(108,63,197,0.70); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
 }
 
 @keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-15px) scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
+    from { opacity: 0; transform: translateY(-20px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-@keyframes orbit {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+@keyframes pulsePoints {
+    0%, 100% { transform: scale(1); opacity: 0.2; }
+    50% { transform: scale(1.05); opacity: 0.3; }
 }
 
-@keyframes typing {
-    from {
-        width: 0;
-    }
-    to {
-        width: 100%;
-    }
+@keyframes typewriter {
+    from { width: 0; }
+    to { width: 100%; }
 }
 
-@keyframes blinkCursor {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0;
-    }
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }
 
-/* ── ANIMATION CLASSES ──────────────────────────────────── */
-
-.animate-fade-up {
-    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-.animate-fade-down {
-    animation: fadeInDown 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-.animate-fade-left {
-    animation: fadeInLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-.animate-fade-right {
-    animation: fadeInRight 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-.animate-scale {
-    animation: scaleIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-.animate-float {
-    animation: float 3s ease-in-out infinite;
-}
-
-.animate-float-slow {
-    animation: floatSlow 4s ease-in-out infinite;
-}
-
-.animate-pulse {
-    animation: pulseGlow 2s ease-in-out infinite;
-}
-
-.animate-shimmer {
-    background: linear-gradient(90deg, 
-        rgba(255,255,255,0.02) 0%, 
-        rgba(255,255,255,0.05) 50%, 
-        rgba(255,255,255,0.02) 100%);
-    background-size: 200% 100%;
-    animation: shimmer 3s ease-in-out infinite;
-}
-
-/* ── STAGGER CHILDREN ──────────────────────────────────── */
-
-.stagger-children > * {
-    opacity: 0;
-    animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-.stagger-children > *:nth-child(1) { animation-delay: 0.05s; }
-.stagger-children > *:nth-child(2) { animation-delay: 0.10s; }
-.stagger-children > *:nth-child(3) { animation-delay: 0.15s; }
-.stagger-children > *:nth-child(4) { animation-delay: 0.20s; }
-.stagger-children > *:nth-child(5) { animation-delay: 0.25s; }
-.stagger-children > *:nth-child(6) { animation-delay: 0.30s; }
-.stagger-children > *:nth-child(7) { animation-delay: 0.35s; }
-.stagger-children > *:nth-child(8) { animation-delay: 0.40s; }
-.stagger-children > *:nth-child(9) { animation-delay: 0.45s; }
-.stagger-children > *:nth-child(10) { animation-delay: 0.50s; }
-
-/* ── Background scene ──────────────────────────────────── */
+/* ── BACKGROUND SCENE ──────────────────────────────────────── */
 
 .scene {
     position: fixed;
@@ -266,7 +130,7 @@ body {
         transparent 72%);
     filter: blur(2px);
     opacity: 0.92;
-    animation: floatSlow 6s ease-in-out infinite;
+    animation: floatSlow 8s ease-in-out infinite;
 }
 
 .atmosphere {
@@ -286,7 +150,7 @@ body {
     transform: translateX(-50%);
     width: 190px;
     opacity: 0.35;
-    animation: float 4s ease-in-out infinite;
+    animation: float 5s ease-in-out infinite;
 }
 
 .horizon {
@@ -310,9 +174,10 @@ body {
     color: rgba(220,210,240,0.18);
     white-space: nowrap;
     font-weight: 300;
+    animation: fadeInUp 2s ease;
 }
 
-/* ── Glass Container ───────────────────────────────────── */
+/* ── GLASS CONTAINER ───────────────────────────────────────── */
 
 .glass-container {
     position: relative;
@@ -321,18 +186,26 @@ body {
     margin: 0 auto;
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 20px;
+    border-radius: 24px;
     padding: 30px;
-    backdrop-filter: blur(22px) saturate(1.4);
-    -webkit-backdrop-filter: blur(22px) saturate(1.4);
+    backdrop-filter: blur(24px) saturate(1.5);
+    -webkit-backdrop-filter: blur(24px) saturate(1.5);
     box-shadow:
         0 0 0 1px rgba(108,63,197,0.18),
-        0 24px 64px rgba(0,0,0,0.65),
+        0 30px 80px rgba(0,0,0,0.65),
         0 0 80px rgba(108,63,197,0.12) inset;
-    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* ── Typography ────────────────────────────────────────── */
+.glass-container:hover {
+    box-shadow:
+        0 0 0 1px rgba(108,63,197,0.25),
+        0 35px 90px rgba(0,0,0,0.70),
+        0 0 80px rgba(108,63,197,0.15) inset;
+}
+
+/* ── TYPOGRAPHY ────────────────────────────────────────────── */
 
 .game-title {
     text-align: center;
@@ -340,21 +213,22 @@ body {
     font-size: 2.8em;
     letter-spacing: 0.12em;
     color: #fff;
-    text-shadow: 0 0 24px rgba(245,197,24,0.35);
-    animation: fadeInDown 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    text-shadow: 0 0 30px rgba(245,197,24,0.3);
+    animation: fadeInDown 0.6s ease;
 }
 
 .tagline-text {
     text-align: center;
     font-size: 10px;
-    letter-spacing: 0.30em;
+    letter-spacing: 0.35em;
     color: var(--muted);
     text-transform: uppercase;
     margin-bottom: 30px;
-    animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 0.2s forwards;
 }
 
-/* ── Buttons ───────────────────────────────────────────── */
+/* ── BUTTONS ────────────────────────────────────────────────── */
 
 .btn {
     padding: 12px 28px;
@@ -362,7 +236,7 @@ body {
     border: 1px solid var(--border);
     border-radius: 12px;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     font-weight: 600;
     display: inline-block;
     text-align: center;
@@ -383,7 +257,7 @@ body {
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-    transition: left 0.6s;
+    transition: left 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn:hover::after {
@@ -437,7 +311,7 @@ body {
     border-radius: 12px;
     cursor: pointer;
     font-weight: 600;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     font-size: 0.8em;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -454,7 +328,7 @@ body {
     width: 100%;
 }
 
-/* ── Edit & Remove Buttons ────────────────────────────── */
+/* ── EDIT & REMOVE ─────────────────────────────────────────── */
 
 .btn-edit {
     background: rgba(255, 255, 255, 0.02);
@@ -465,7 +339,7 @@ body {
     cursor: pointer;
     font-weight: 600;
     font-size: 0.75em;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
@@ -486,7 +360,7 @@ body {
     cursor: pointer;
     font-weight: 600;
     font-size: 0.75em;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
@@ -498,37 +372,33 @@ body {
     transform: translateY(-2px) scale(1.05);
 }
 
-/* ── Forms ────────────────────────────────────────────── */
-
-.auth-form {
-    max-width: 400px;
-    margin: 20px auto;
-}
+/* ── FORMS ──────────────────────────────────────────────────── */
 
 .form-group {
     margin-bottom: 18px;
-    animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .form-group label {
     display: block;
     font-size: 11px;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     color: var(--muted);
     margin-bottom: 7px;
     text-transform: uppercase;
+    font-weight: 500;
 }
 
 .form-group input {
     width: 100%;
     background: var(--input);
     border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 13px 16px;
+    border-radius: 12px;
+    padding: 14px 18px;
     font-size: 15px;
     color: #fff;
     outline: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .form-group input::placeholder {
@@ -541,13 +411,20 @@ body {
     transform: scale(1.01);
 }
 
+.form-group small {
+    display: block;
+    margin-top: 5px;
+    color: rgba(255,255,255,0.15);
+    font-size: 0.7em;
+}
+
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 15px;
 }
 
-/* ── Dashboard Header ──────────────────────────────────── */
+/* ── DASHBOARD HEADER ──────────────────────────────────────── */
 
 .dashboard-header {
     display: flex;
@@ -558,7 +435,7 @@ body {
     gap: 15px;
     padding-bottom: 15px;
     border-bottom: 1px solid var(--border);
-    animation: fadeInDown 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fadeInDown 0.6s ease;
 }
 
 .header-actions {
@@ -580,7 +457,7 @@ body {
     animation: pulseGlow 3s ease-in-out infinite;
 }
 
-/* ── Player Stats ──────────────────────────────────────── */
+/* ── PLAYER STATS ───────────────────────────────────────────── */
 
 .player-stats {
     background: rgba(255, 255, 255, 0.02);
@@ -593,12 +470,12 @@ body {
     margin-bottom: 30px;
     position: relative;
     overflow: hidden;
-    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .player-stats:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
     border-color: rgba(108,63,197,0.15);
     box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
 }
@@ -643,7 +520,7 @@ body {
     font-weight: 800;
     color: rgba(255, 255, 255, 0.2);
     animation: pulsePoints 3s ease-in-out infinite;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .points-value:hover {
@@ -651,7 +528,7 @@ body {
     transform: scale(1.05);
 }
 
-/* ── Submit Section ────────────────────────────────────── */
+/* ── SUBMIT SECTION ─────────────────────────────────────────── */
 
 .submit-section {
     background: rgba(255, 255, 255, 0.02);
@@ -661,8 +538,8 @@ body {
     border-radius: 18px;
     margin-bottom: 30px;
     border: 1px solid var(--border);
-    animation: fadeInUp 1.0s cubic-bezier(0.4, 0, 0.2, 1);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fadeInUp 1.0s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .submit-section:hover {
@@ -688,7 +565,7 @@ body {
     font-family: 'Courier New', monospace;
     border: 1px solid var(--border);
     border-radius: 14px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     background: rgba(255, 255, 255, 0.01);
     color: rgba(255, 255, 255, 0.4);
 }
@@ -705,7 +582,7 @@ body {
     transform: scale(1.01);
 }
 
-/* ── Messages ──────────────────────────────────────────── */
+/* ── MESSAGES ────────────────────────────────────────────────── */
 
 .message {
     margin-top: 15px;
@@ -713,7 +590,7 @@ body {
     border-radius: 14px;
     text-align: center;
     font-weight: 600;
-    animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     display: none;
     font-size: 0.8em;
     letter-spacing: 1px;
@@ -734,17 +611,11 @@ body {
 }
 
 @keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-15px) scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
+    from { opacity: 0; transform: translateY(-20px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* ── Dashboard Grid ────────────────────────────────────── */
+/* ── DASHBOARD GRID ──────────────────────────────────────────── */
 
 .dashboard-grid {
     display: grid;
@@ -785,7 +656,7 @@ body {
     background: rgba(255, 255, 255, 0.02);
 }
 
-/* ── List Items ────────────────────────────────────────── */
+/* ── LIST ITEMS ──────────────────────────────────────────────── */
 
 .history-item,
 .leaderboard-item,
@@ -798,11 +669,11 @@ body {
     padding: 14px 18px;
     margin: 10px 0;
     border-radius: 14px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     border: 1px solid rgba(255, 255, 255, 0.01);
     color: rgba(255, 255, 255, 0.2);
     font-size: 0.85em;
-    animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .history-item:hover,
@@ -837,13 +708,13 @@ body {
     border-left: 2px solid rgba(205, 127, 50, 0.04);
 }
 
-/* ── Owner Section ─────────────────────────────────────── */
+/* ── OWNER SECTION ───────────────────────────────────────────── */
 
 .owner-section {
     margin-bottom: 40px;
     border-bottom: 1px solid var(--border);
     padding-bottom: 25px;
-    animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .owner-section:last-child {
@@ -871,7 +742,7 @@ body {
     border: 1px solid var(--border);
     border-radius: 18px;
     padding: 25px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .highlight-section:hover {
@@ -890,7 +761,7 @@ body {
     border: 1px solid rgba(108,63,197,0.03);
 }
 
-/* ── Info Boxes ────────────────────────────────────────── */
+/* ── INFO BOXES ──────────────────────────────────────────────── */
 
 .info-box {
     background: rgba(255, 255, 255, 0.01);
@@ -917,7 +788,7 @@ body {
     color: rgba(255, 255, 255, 0.1);
 }
 
-/* ── Product Form ──────────────────────────────────────── */
+/* ── PRODUCT FORM ────────────────────────────────────────────── */
 
 .product-form {
     background: rgba(255, 255, 255, 0.01);
@@ -927,7 +798,7 @@ body {
     border-radius: 14px;
     margin-top: 10px;
     border: 1px solid rgba(255, 255, 255, 0.01);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .product-form:hover {
@@ -942,7 +813,7 @@ body {
     text-transform: uppercase;
 }
 
-/* ── Links ─────────────────────────────────────────────── */
+/* ── LINKS ───────────────────────────────────────────────────── */
 
 .auth-links {
     text-align: center;
@@ -959,7 +830,7 @@ body {
     color: var(--gold);
     text-decoration: none;
     font-weight: 500;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s ease;
     position: relative;
 }
 
@@ -971,7 +842,7 @@ body {
     width: 0;
     height: 1px;
     background: var(--gold);
-    transition: width 0.3s;
+    transition: width 0.3s ease;
 }
 
 .owner-link a:hover::after {
@@ -988,7 +859,7 @@ body {
     color: var(--muted);
     text-decoration: none;
     font-weight: 500;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s ease;
 }
 
 .back-home:hover {
@@ -996,56 +867,96 @@ body {
     transform: translateX(-3px);
 }
 
-/* ── Divider ───────────────────────────────────────────── */
+/* ── RESPONSIVE ──────────────────────────────────────────────── */
 
-.divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 16px 0 14px;
+@media (max-width: 992px) {
+    .form-row {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
-/* ── Owner Login Box ───────────────────────────────────── */
-
-.owner-login-box {
-    max-width: 450px;
-    margin: 0 auto;
+@media (max-width: 768px) {
+    .glass-container {
+        padding: 18px;
+        border-radius: 18px;
+    }
+    
+    .game-title {
+        font-size: 2em;
+    }
+    
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .dashboard-header {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+    
+    .header-actions {
+        justify-content: center;
+    }
+    
+    .player-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .owner-section h2 {
+        font-size: 0.7em;
+    }
+    
+    .highlight-section {
+        padding: 18px;
+    }
+    
+    .points-value {
+        font-size: 2.8em;
+    }
+    
+    .sun {
+        width: 220px;
+        height: 220px;
+        bottom: 15%;
+    }
+    
+    .ship {
+        width: 120px;
+        bottom: calc(15% + 100px);
+    }
+    
+    .horizon {
+        bottom: 15%;
+    }
+    
+    .tagline {
+        bottom: calc(15% - 18px);
+        font-size: 8px;
+        letter-spacing: 0.15em;
+    }
 }
 
-/* ── Player Item ───────────────────────────────────────── */
-
-.player-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.player-item button {
-    background: rgba(255, 50, 50, 0.02);
-    color: rgba(255, 50, 50, 0.08);
-    border: 1px solid rgba(255, 50, 50, 0.02);
-    padding: 8px 18px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    font-size: 0.75em;
-    letter-spacing: 1px;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-}
-
-.player-item button:hover {
-    background: rgba(255, 50, 50, 0.04);
-    border-color: rgba(255, 50, 50, 0.04);
-    color: rgba(255, 50, 50, 0.15);
-    transform: translateY(-2px) scale(1.05);
-}
-
-/* ── Placeholder ───────────────────────────────────────── */
-
-::placeholder {
-    color: rgba(255, 255, 255, 0.02);
-    opacity: 0.7;
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    
+    .glass-container {
+        padding: 12px;
+        border-radius: 14px;
+    }
+    
+    .game-title {
+        font-size: 1.6em;
+    }
+    
+    .points-value {
+        font-size: 2.2em;
+    }
 }
