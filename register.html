@@ -1,329 +1,407 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>ROADFIVE – Register</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ROADFIVE - Sign Up</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --gold:   #F5C518;
+  --purple: #6C3FC5;
+  --violet: #3B1F6A;
+  --bg:     #0A0A10;
+  --card:   rgba(15, 12, 30, 0.78);
+  --border: rgba(255,255,255,0.10);
+  --text:   #E0D9F5;
+  --muted:  rgba(200,190,230,0.50);
+}
 
-        :root {
-            --gold:   #F5C518;
-            --purple: #6C3FC5;
-            --violet: #3B1F6A;
-            --bg:     #0A0A10;
-            --card:   rgba(15, 12, 30, 0.78);
-            --input:  rgba(255,255,255,0.07);
-            --border: rgba(255,255,255,0.10);
-            --text:   #E0D9F5;
-            --muted:  rgba(200,190,230,0.50);
-        }
+html, body {
+  height: 100%;
+  background: var(--bg);
+  font-family: 'Inter', sans-serif;
+  color: var(--text);
+  overflow-x: hidden;
+}
 
-        html, body {
-            height: 100%;
-            background: var(--bg);
-            font-family: 'Inter', sans-serif;
-            color: var(--text);
-            overflow: hidden;
-        }
+body { 
+  padding: 20px; 
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-        .scene {
-            position: fixed;
-            inset: 0;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            z-index: 0;
-            pointer-events: none;
-        }
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-30px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes pulseGlow {
+  0%,100% { box-shadow: 0 4px 20px rgba(108,63,197,0.40); }
+  50%     { box-shadow: 0 4px 40px rgba(108,63,197,0.70); }
+}
+@keyframes float {
+  0%,100% { transform: translateX(-50%) translateY(0px); }
+  50%     { transform: translateX(-50%) translateY(-10px); }
+}
+@keyframes floatSlow {
+  0%,100% { transform: translateX(-50%) translateY(0px) rotate(0deg); }
+  50%     { transform: translateX(-50%) translateY(-5px) rotate(2deg); }
+}
 
-        .sun {
-            position: absolute;
-            bottom: 18%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 340px;
-            height: 340px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 50% 60%,
-                #FFD966 0%,
-                #E8872A 28%,
-                #A8246A 55%,
-                transparent 72%);
-            filter: blur(2px);
-            opacity: 0.92;
-        }
+.scene {
+  position: fixed; inset: 0;
+  display: flex; align-items: flex-end; justify-content: center;
+  z-index: 0; pointer-events: none;
+}
+.atmosphere {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 55% at 50% 78%, rgba(140,50,160,0.55) 0%, transparent 70%),
+    linear-gradient(to bottom, #0A0A10 0%, #1A0D2E 50%, #0A0A10 100%);
+}
+.sun {
+  position: absolute;
+  bottom: 18%; left: 50%;
+  transform: translateX(-50%);
+  width: 340px; height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 60%,
+    #FFD966 0%, #E8872A 28%, #A8246A 55%, transparent 72%);
+  filter: blur(2px); opacity: 0.92;
+  animation: floatSlow 6s ease-in-out infinite;
+}
+.ship {
+  position: absolute;
+  bottom: calc(18% + 148px); left: 50%;
+  transform: translateX(-50%);
+  width: 190px; opacity: 0.35;
+  animation: float 4s ease-in-out infinite;
+}
+.horizon {
+  position: absolute;
+  bottom: 18%; left: 10%; right: 10%;
+  height: 1px;
+  background: linear-gradient(to right,
+    transparent, rgba(245,197,24,0.45) 20%,
+    rgba(245,197,24,0.45) 80%, transparent);
+}
+.tagline-scene {
+  position: absolute;
+  bottom: calc(18% - 22px); left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px; letter-spacing: 0.22em;
+  color: rgba(220,210,240,0.18);
+  white-space: nowrap; font-weight: 300;
+}
+.ship-svg { width: 100%; height: 100%; fill: rgba(200,190,230,0.5); }
 
-        .atmosphere {
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(ellipse 80% 55% at 50% 78%,
-                    rgba(140, 50, 160, 0.55) 0%,
-                    transparent 70%),
-                linear-gradient(to bottom, #0A0A10 0%, #1A0D2E 50%, #0A0A10 100%);
-        }
+.glass-container {
+  position: relative; z-index: 10;
+  max-width: 480px;
+  margin: 0 auto;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px; 
+  padding: 40px 35px;
+  backdrop-filter: blur(22px) saturate(1.4);
+  -webkit-backdrop-filter: blur(22px) saturate(1.4);
+  box-shadow:
+    0 0 0 1px rgba(108,63,197,0.18),
+    0 24px 64px rgba(0,0,0,0.65),
+    0 0 80px rgba(108,63,197,0.12) inset;
+  animation: fadeInUp 0.8s cubic-bezier(0.4,0,0.2,1);
+}
 
-        .ship {
-            position: absolute;
-            bottom: calc(18% + 148px);
-            left: 50%;
-            transform: translateX(-50%);
-            width: 190px;
-            opacity: 0.35;
-        }
+.game-title {
+  text-align: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.8em; 
+  letter-spacing: 0.12em;
+  color: #fff;
+  text-shadow: 0 0 24px rgba(245,197,24,0.35);
+  animation: fadeInDown 0.6s cubic-bezier(0.4,0,0.2,1);
+}
+.tagline-text {
+  text-align: center; 
+  font-size: 10px;
+  letter-spacing: 0.30em; 
+  color: var(--muted);
+  text-transform: uppercase; 
+  margin-bottom: 35px;
+  animation: fadeInUp 0.6s cubic-bezier(0.4,0,0.2,1);
+}
 
-        .horizon {
-            position: absolute;
-            bottom: 18%;
-            left: 10%;
-            right: 10%;
-            height: 1px;
-            background: linear-gradient(to right,
-                transparent, rgba(245,197,24,0.45) 20%,
-                rgba(245,197,24,0.45) 80%, transparent);
-        }
+.signup-form {
+  animation: fadeInUp 0.8s cubic-bezier(0.4,0,0.2,1);
+}
+.form-group {
+  margin-bottom: 20px;
+}
+.form-group label {
+  display: block;
+  font-size: 0.75em;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.15);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.form-group input {
+  width: 100%;
+  padding: 14px 18px;
+  font-size: 1em;
+  font-family: 'Inter', sans-serif;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+  background: rgba(255,255,255,0.02);
+  color: rgba(255,255,255,0.7);
+}
+.form-group input::placeholder {
+  color: rgba(255,255,255,0.1);
+}
+.form-group input:focus {
+  border-color: var(--purple);
+  outline: none;
+  background: rgba(255,255,255,0.04);
+  box-shadow: 0 0 60px rgba(108,63,197,0.05);
+}
 
-        .tagline {
-            position: absolute;
-            bottom: calc(18% - 22px);
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 11px;
-            letter-spacing: 0.22em;
-            color: rgba(220,210,240,0.18);
-            white-space: nowrap;
-            font-weight: 300;
-        }
+.btn {
+  padding: 14px 28px;
+  font-size: 0.9em;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+  font-weight: 600;
+  display: inline-block;
+  text-align: center;
+  letter-spacing: 0.5px;
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: rgba(255,255,255,0.7);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+  transition: left 0.6s;
+}
+.btn:hover::after { left: 100%; }
+.btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.15);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+.btn:active { transform: translateY(0) scale(0.98); }
 
-        .stage {
-            position: relative;
-            z-index: 10;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+.btn-primary {
+  background: linear-gradient(135deg, #7B4FD8 0%, #5830A0 100%);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 20px rgba(108,63,197,0.40);
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+.btn-primary:hover {
+  opacity: 0.92;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 6px 35px rgba(108,63,197,0.60);
+}
 
-        .card {
-            width: 420px;
-            max-width: 92vw;
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 44px 40px 40px;
-            backdrop-filter: blur(22px) saturate(1.4);
-            -webkit-backdrop-filter: blur(22px) saturate(1.4);
-            box-shadow:
-                0 0 0 1px rgba(108,63,197,0.18),
-                0 24px 64px rgba(0,0,0,0.65),
-                0 0 80px rgba(108,63,197,0.12) inset;
-        }
+.message {
+  margin-top: 15px;
+  padding: 14px 20px;
+  border-radius: 14px;
+  text-align: center;
+  font-weight: 600;
+  animation: slideIn 0.4s cubic-bezier(0.4,0,0.2,1);
+  font-size: 0.8em;
+  letter-spacing: 1px;
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-15px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.message.success {
+  background: rgba(0,255,0,0.02);
+  border: 1px solid rgba(0,255,0,0.08);
+  color: rgba(0,220,0,0.4);
+}
+.message.error {
+  background: rgba(255,0,0,0.02);
+  border: 1px solid rgba(255,0,0,0.08);
+  color: rgba(255,80,80,0.4);
+}
 
-        .brand {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 32px;
-        }
-
-        .brand-lock {
-            font-size: 40px;
-            line-height: 1;
-            filter: drop-shadow(0 0 10px rgba(245,197,24,0.5));
-        }
-
-        .brand-name {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 38px;
-            letter-spacing: 0.12em;
-            color: #fff;
-            text-shadow: 0 0 24px rgba(245,197,24,0.35);
-        }
-
-        .brand-sub {
-            font-size: 10px;
-            letter-spacing: 0.30em;
-            color: var(--muted);
-            text-transform: uppercase;
-        }
-
-        .field { margin-bottom: 18px; }
-
-        label {
-            display: block;
-            font-size: 11px;
-            letter-spacing: 0.12em;
-            color: var(--muted);
-            margin-bottom: 7px;
-            text-transform: uppercase;
-        }
-
-        input {
-            width: 100%;
-            background: var(--input);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 13px 16px;
-            font-size: 15px;
-            color: #fff;
-            outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
-
-        input::placeholder { color: rgba(255,255,255,0.25); }
-
-        input:focus {
-            border-color: var(--purple);
-            box-shadow: 0 0 0 3px rgba(108,63,197,0.22);
-        }
-
-        .btn-login {
-            display: block;
-            width: 100%;
-            margin-top: 26px;
-            padding: 14px;
-            border: none;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #7B4FD8 0%, #5830A0 100%);
-            color: #fff;
-            font-family: 'Inter', sans-serif;
-            font-size: 15px;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            cursor: pointer;
-            transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
-            box-shadow: 0 4px 20px rgba(108,63,197,0.40);
-        }
-
-        .btn-login:hover {
-            opacity: 0.92;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 28px rgba(108,63,197,0.55);
-        }
-
-        .btn-login:active { transform: translateY(0); }
-
-        .card-footer {
-            margin-top: 22px;
-            text-align: center;
-            font-size: 13px;
-            color: var(--muted);
-        }
-
-        .card-footer a {
-            color: var(--gold);
-            text-decoration: none;
-            font-weight: 500;
-            transition: opacity 0.2s;
-        }
-
-        .card-footer a:hover { opacity: 0.75; }
-
-        .back-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            margin-top: 14px;
-            font-size: 12px;
-            color: var(--muted);
-            opacity: 0.65;
-            cursor: pointer;
-            transition: opacity 0.2s;
-            text-decoration: none;
-        }
-
-        .back-link:hover { opacity: 1; }
-
-        .divider {
-            border: none;
-            border-top: 1px solid var(--border);
-            margin: 16px 0 14px;
-        }
-
-        @media (max-width: 480px) {
-            .card { padding: 32px 24px 28px; }
-            .brand-name { font-size: 30px; }
-            .brand-lock { font-size: 32px; }
-            .sun { width: 220px; height: 220px; bottom: 15%; }
-            .ship { width: 120px; bottom: calc(15% + 100px); }
-            .horizon { bottom: 15%; }
-            .tagline { bottom: calc(15% - 18px); font-size: 8px; letter-spacing: 0.15em; }
-        }
-    </style>
+.login-link {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.85em;
+  color: var(--muted);
+}
+.login-link a {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+.login-link a:hover {
+  color: #fff;
+}
+</style>
 </head>
 <body>
 
-    <div class="scene">
-        <div class="atmosphere"></div>
-        <div class="sun"></div>
-        <svg class="ship" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M30 140 Q100 155 170 140 L160 165 Q100 178 40 165 Z" fill="#1a0d2e"/>
-            <rect x="55" y="110" width="90" height="32" rx="4" fill="#1a0d2e"/>
-            <circle cx="75" cy="126" r="5" fill="#2d1a4a"/>
-            <circle cx="100" cy="126" r="5" fill="#2d1a4a"/>
-            <circle cx="125" cy="126" r="5" fill="#2d1a4a"/>
-            <circle cx="100" cy="126" r="4" fill="#3a2460"/>
-            <rect x="98" y="30" width="4" height="82" fill="#1a0d2e"/>
-            <rect x="70" y="50" width="3" height="62" fill="#1a0d2e"/>
-            <rect x="128" y="60" width="3" height="52" fill="#1a0d2e"/>
-            <path d="M102 32 Q130 55 130 85 L102 85 Z" fill="#1a0d2e" opacity="0.9"/>
-            <path d="M98 32 Q70 55 70 85 L98 85 Z" fill="#1a0d2e" opacity="0.9"/>
-            <path d="M102 32 Q118 42 118 58 L102 58 Z" fill="#1a0d2e"/>
-            <path d="M98 32 Q82 42 82 58 L98 58 Z" fill="#1a0d2e"/>
-            <path d="M73 52 Q90 65 90 82 L73 82 Z" fill="#1a0d2e" opacity="0.85"/>
-            <path d="M131 62 Q146 72 146 88 L131 88 Z" fill="#1a0d2e" opacity="0.8"/>
-            <path d="M102 30 L116 22 L102 26 Z" fill="#1a0d2e"/>
-            <path d="M98 30 L84 20 L98 25 Z" fill="#1a0d2e"/>
-            <line x1="55" y1="112" x2="20" y2="95" stroke="#1a0d2e" stroke-width="3"/>
-            <path d="M20 95 Q36 104 55 112 L50 100 Z" fill="#1a0d2e" opacity="0.7"/>
-            <rect x="93" y="55" width="14" height="8" rx="2" fill="#1a0d2e"/>
-            <circle cx="113" cy="22" r="4" fill="#1a0d2e"/>
-            <line x1="110" y1="26" x2="116" y2="30" stroke="#1a0d2e" stroke-width="1.5"/>
-            <line x1="116" y1="26" x2="110" y2="30" stroke="#1a0d2e" stroke-width="1.5"/>
-        </svg>
-        <div class="horizon"></div>
-        <p class="tagline">weapon of mass distribution</p>
+<!-- BACKGROUND SCENE -->
+<div class="scene">
+  <div class="atmosphere"></div>
+  <div class="sun"></div>
+  <div class="ship">
+    <svg class="ship-svg" viewBox="0 0 190 120" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 80 Q95 110 170 80 L160 95 Q95 120 30 95 Z" fill="rgba(180,160,220,0.4)"/>
+      <rect x="55" y="50" width="80" height="35" rx="6" fill="rgba(180,160,220,0.25)"/>
+      <ellipse cx="95" cy="50" rx="28" ry="18" fill="rgba(108,63,197,0.3)"/>
+      <ellipse cx="95" cy="50" rx="18" ry="11" fill="rgba(200,190,255,0.08)"/>
+      <path d="M55 75 L10 95 L40 78 Z" fill="rgba(180,160,220,0.2)"/>
+      <path d="M135 75 L180 95 L150 78 Z" fill="rgba(180,160,220,0.2)"/>
+      <ellipse cx="72" cy="87" rx="6" ry="4" fill="rgba(245,197,24,0.25)"/>
+      <ellipse cx="118" cy="87" rx="6" ry="4" fill="rgba(245,197,24,0.25)"/>
+      <line x1="95" y1="32" x2="95" y2="18" stroke="rgba(200,190,230,0.3)" stroke-width="1.5"/>
+      <circle cx="95" cy="16" r="3" fill="rgba(245,197,24,0.5)"/>
+    </svg>
+  </div>
+  <div class="horizon"></div>
+  <div class="tagline-scene">NAVIGATE THE UNKNOWN</div>
+</div>
+
+<!-- SIGNUP FORM -->
+<div class="glass-container">
+  <div class="game-title">ROADFIVE</div>
+  <div class="tagline-text">Interstellar Rewards Protocol</div>
+  
+  <form class="signup-form" id="signupForm" onsubmit="handleSignup(event)">
+    <div class="form-group">
+      <label>👤 Pilot Name</label>
+      <input type="text" id="username" placeholder="Enter your pilot name" required>
     </div>
-
-    <div class="stage">
-        <div class="card">
-            <div class="brand">
-                <span class="brand-lock">📝</span>
-                <span class="brand-name">ROADFIVE</span>
-                <span class="brand-sub">Create Your Account</span>
-            </div>
-
-            <div class="field">
-                <label for="regUsername">Username</label>
-                <input id="regUsername" type="text" placeholder="Choose a username" autocomplete="username"/>
-            </div>
-
-            <div class="field">
-                <label for="regPassword">Password</label>
-                <input id="regPassword" type="password" placeholder="Choose a password" autocomplete="new-password"/>
-            </div>
-
-            <div class="field">
-                <label for="confirmPassword">Confirm Password</label>
-                <input id="confirmPassword" type="password" placeholder="Confirm your password" autocomplete="new-password"/>
-            </div>
-
-            <button class="btn-login" id="registerBtn">Create Account</button>
-
-            <hr class="divider"/>
-
-            <div class="card-footer">
-                Already have an account? <a href="login.html">Login here</a>
-            </div>
-        </div>
+    <div class="form-group">
+      <label>📧 Email Address</label>
+      <input type="email" id="email" placeholder="Enter your email" required>
     </div>
+    <div class="form-group">
+      <label>🔒 Password</label>
+      <input type="password" id="password" placeholder="Create a password" required minlength="6">
+    </div>
+    <div class="form-group">
+      <label>🔑 Confirm Password</label>
+      <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+    </div>
+    <button type="submit" class="btn btn-primary">🚀 Launch Account</button>
+    <div id="signupMessage" class="message" style="display:none;"></div>
+  </form>
+  
+  <div class="login-link">
+    Already have an account? <a href="login.html">Sign in here</a>
+  </div>
+</div>
 
-    <script src="script.js"></script>
+<script>
+function handleSignup(event) {
+  event.preventDefault();
+  
+  const username = document.getElementById('username').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+  const confirmPassword = document.getElementById('confirmPassword').value;
+  const messageEl = document.getElementById('signupMessage');
+  
+  // Validate
+  if (!username || !email || !password || !confirmPassword) {
+    messageEl.className = 'message error';
+    messageEl.textContent = '✕ Please fill in all fields';
+    messageEl.style.display = 'block';
+    return;
+  }
+  
+  if (password !== confirmPassword) {
+    messageEl.className = 'message error';
+    messageEl.textContent = '✕ Passwords do not match';
+    messageEl.style.display = 'block';
+    return;
+  }
+  
+  if (password.length < 6) {
+    messageEl.className = 'message error';
+    messageEl.textContent = '✕ Password must be at least 6 characters';
+    messageEl.style.display = 'block';
+    return;
+  }
+  
+  // Get existing users from localStorage
+  const users = JSON.parse(localStorage.getItem('roadfive_users') || '[]');
+  
+  // Check if username already exists
+  if (users.some(u => u.username === username)) {
+    messageEl.className = 'message error';
+    messageEl.textContent = '✕ Username already taken. Please choose another.';
+    messageEl.style.display = 'block';
+    return;
+  }
+  
+  // Check if email already exists
+  if (users.some(u => u.email === email)) {
+    messageEl.className = 'message error';
+    messageEl.textContent = '✕ Email already registered. Please login.';
+    messageEl.style.display = 'block';
+    return;
+  }
+  
+  // Save user
+  const newUser = {
+    id: Date.now(),
+    username: username,
+    email: email,
+    password: password,
+    points: 4820,
+    codes: ['RF-4421', 'RF-3390', 'RF-2201', 'RF-1105', 'RF-0882'],
+    createdAt: new Date().toISOString()
+  };
+  
+  users.push(newUser);
+  localStorage.setItem('roadfive_users', JSON.stringify(users));
+  
+  // Set current session
+  localStorage.setItem('roadfive_current_user', JSON.stringify(newUser));
+  
+  // Show success
+  messageEl.className = 'message success';
+  messageEl.textContent = `✅ Welcome to the crew, ${username}! Redirecting...`;
+  messageEl.style.display = 'block';
+  
+  // Redirect to dashboard after 1.5 seconds
+  setTimeout(() => {
+    window.location.href = 'player-dashboard.html';
+  }, 1500);
+}
+</script>
 </body>
 </html>
