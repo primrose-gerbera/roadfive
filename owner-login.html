@@ -241,4 +241,84 @@
         .back-link:hover { opacity: 1; }
 
         .divider {
-            border
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 16px 0 14px;
+        }
+
+        @media (max-width: 480px) {
+            .card { padding: 32px 24px 28px; }
+            .brand-name { font-size: 30px; }
+            .brand-lock { font-size: 32px; }
+            .sun { width: 220px; height: 220px; bottom: 15%; }
+            .ship { width: 120px; bottom: calc(15% + 100px); }
+            .horizon { bottom: 15%; }
+            .tagline { bottom: calc(15% - 18px); font-size: 8px; letter-spacing: 0.15em; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scene">
+        <div class="atmosphere"></div>
+        <div class="sun"></div>
+        <svg class="ship" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 140 Q100 155 170 140 L160 165 Q100 178 40 165 Z" fill="#1a0d2e"/>
+            <rect x="55" y="110" width="90" height="32" rx="4" fill="#1a0d2e"/>
+            <circle cx="75" cy="126" r="5" fill="#2d1a4a"/>
+            <circle cx="100" cy="126" r="5" fill="#2d1a4a"/>
+            <circle cx="125" cy="126" r="5" fill="#2d1a4a"/>
+            <circle cx="100" cy="126" r="4" fill="#3a2460"/>
+            <rect x="98" y="30" width="4" height="82" fill="#1a0d2e"/>
+            <rect x="70" y="50" width="3" height="62" fill="#1a0d2e"/>
+            <rect x="128" y="60" width="3" height="52" fill="#1a0d2e"/>
+            <path d="M102 32 Q130 55 130 85 L102 85 Z" fill="#1a0d2e" opacity="0.9"/>
+            <path d="M98 32 Q70 55 70 85 L98 85 Z" fill="#1a0d2e" opacity="0.9"/>
+            <path d="M102 32 Q118 42 118 58 L102 58 Z" fill="#1a0d2e"/>
+            <path d="M98 32 Q82 42 82 58 L98 58 Z" fill="#1a0d2e"/>
+            <path d="M73 52 Q90 65 90 82 L73 82 Z" fill="#1a0d2e" opacity="0.85"/>
+            <path d="M131 62 Q146 72 146 88 L131 88 Z" fill="#1a0d2e" opacity="0.8"/>
+            <path d="M102 30 L116 22 L102 26 Z" fill="#1a0d2e"/>
+            <path d="M98 30 L84 20 L98 25 Z" fill="#1a0d2e"/>
+            <line x1="55" y1="112" x2="20" y2="95" stroke="#1a0d2e" stroke-width="3"/>
+            <path d="M20 95 Q36 104 55 112 L50 100 Z" fill="#1a0d2e" opacity="0.7"/>
+            <rect x="93" y="55" width="14" height="8" rx="2" fill="#1a0d2e"/>
+            <circle cx="113" cy="22" r="4" fill="#1a0d2e"/>
+            <line x1="110" y1="26" x2="116" y2="30" stroke="#1a0d2e" stroke-width="1.5"/>
+            <line x1="116" y1="26" x2="110" y2="30" stroke="#1a0d2e" stroke-width="1.5"/>
+        </svg>
+        <div class="horizon"></div>
+        <p class="tagline">weapon of mass distribution</p>
+    </div>
+
+    <div class="stage">
+        <div class="card">
+            <div class="brand">
+                <span class="brand-lock">👑</span>
+                <span class="brand-name">ROADFIVE</span>
+                <span class="brand-sub">Owner Access Only</span>
+            </div>
+
+            <div class="field">
+                <label for="ownerUsername">Username</label>
+                <input id="ownerUsername" type="text" placeholder="Enter owner username" autocomplete="username"/>
+            </div>
+
+            <div class="field">
+                <label for="ownerPassword">Password</label>
+                <input id="ownerPassword" type="password" placeholder="••••••••" autocomplete="current-password"/>
+            </div>
+
+            <button class="btn-login" id="ownerLoginBtn">Login as Owner</button>
+
+            <hr class="divider"/>
+
+            <div class="card-footer">
+                <a href="login.html">← Back to Player Login</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
