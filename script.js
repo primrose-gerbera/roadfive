@@ -53,8 +53,24 @@ async function loadAllData() {
     return false;
 }
 
-setInterval(saveAllData, 30000);
+// ⭐ Auto-save every 15 seconds (faster for MongoDB)
+setInterval(saveAllData, 15000);
+
+// ⭐ Save on page close
 window.addEventListener('beforeunload', saveAllData);
+
+// ⭐ Load data from MongoDB when page loads
+window.addEventListener('load', async () => {
+    // Initialize data first
+    initializeData();
+    
+    // Then load from server (MongoDB)
+    if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+        await loadAllData();
+    }
+    
+    setupPage();
+});
 
 // ========================================
 // INITIALIZATION
